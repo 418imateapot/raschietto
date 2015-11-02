@@ -1,0 +1,15 @@
+Options +FollowSymLinks
+IndexIgnore */*
+RewriteEngine on
+LogLevel warn rewrite:trace8
+
+# if a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_URI} !/api
+
+# otherwise forward it to index.html 
+RewriteRule ^.*$ /index.html [NC,L]
+RewriteRule ^app/. /index.html [NC,L]
+
