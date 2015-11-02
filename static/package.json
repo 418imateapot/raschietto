@@ -40,6 +40,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
-    "angular-foundation": "^0.8.0"
+    "angular-foundation": "^0.8.0",
+    "angular-ui-router": "^0.2.15"
   }
 }
