@@ -3,9 +3,7 @@
 import os
 from flask import Flask
 
-STATIC_FOLDER = os.path.join(os.getcwd(), "static")
-
-app = Flask(__name__, static_folder=STATIC_FOLDER)
+app = Flask(__name__)
 app.config.from_object("__main__")
 
 import routes
