@@ -5,6 +5,7 @@ from flask import Flask
 
 app = Flask(__name__)
 app.config.from_object("__main__")
+app.debug=True
 
 import routes
 

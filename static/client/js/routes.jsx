@@ -24,6 +24,12 @@ var routes = ['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 },
             }
 
-        });
+        })
+
+		.state('bottoni', {
+			url: '/bottoni',
+			templateUrl: 'view/bottoni.html',
+			controller: 'bottoniCtrl'
+		});
     }
 ];
