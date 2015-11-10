@@ -12,11 +12,13 @@ Progetto di techweb 2015!!
 
 ## Installazione
 1. Clonare il repository da qualche parte:
-```bash
-$ git clone https://github.com/418imateapot/semantic_teapot.git
-```
+
+  ```bash
+    $ git clone https://github.com/418imateapot/semantic_teapot.git
+    ```
 2. Eseguire lo script di setup
-```bash
-$ semantic_teapot/setup.py
-```
+  
+  ```bash
+  $ semantic_teapot/setup.py
+  ```
 3. Installare i file di configurazione appropriata dalla subdirectory "apache_files" (dopo aver letto il secondo README che li accompagna)
