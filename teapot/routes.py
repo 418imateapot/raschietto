@@ -8,6 +8,15 @@ from . import app
 def hello():
     return "Ammazzaoh"
 
+@app.route('/spam')
+def spam():
+    string = ""
+    for i in range (0,1000):
+        if i%15 == 0:
+            string += "\n"
+        string += "spam "
+    return string
+
 @app.route('/bottoni')
 def fabbio():
     sparql = SPARQLWrapper('http://tweb2015.cs.unibo.it:8080/data',returnFormat='json')
