@@ -9,6 +9,16 @@ CURRENT_DIR= os.getcwd()
 VIRTUALENV_NAME = 'env'
 REQ_FILE = path.join(path.dirname(path.realpath(__file__)), 'requirements.txt')
 
+
+def spacer(func):
+    """ Decorator to space the output of my functions """
+    def inner(*args, **kwargs):
+        for i in range(1,4):
+            print ""
+        return func(*args, **kwargs)
+    return inner
+
+
 def which(program):
     """ Finds the path of the executable for a given command """
     def is_exe(fpath):
@@ -34,6 +44,7 @@ def checkDir():
         print "cd into {}".format(REPO_DIR)
 
 
+@spacer
 def makeVirtualenv(name=VIRTUALENV_NAME):
     """ Creates a default virtualenv """
     print "=================================="
@@ -51,6 +62,7 @@ def makeVirtualenv(name=VIRTUALENV_NAME):
             sys.exit(1)
 
 
+@spacer
 def installPyLibs(requirements_file=REQ_FILE):
     """ Installs all required libraries in the virtualenv """
     print "===================================="
@@ -68,12 +80,14 @@ def installPyLibs(requirements_file=REQ_FILE):
             sys.exit(1)
 
 
+@spacer
 def setupNodeDeps():
     """ Runs npm install in the static directory """
     pid = fork()
     if pid == 0:
         print "==========================="
         print "Installing npm dependencies"
+        print "(This may take a while... )"
         print "==========================="
         os.chdir('static')
         npm_path = which('npm')
@@ -85,6 +99,7 @@ def setupNodeDeps():
             sys.exit(1)
 
 
+@spacer
 def buildStaticFiles():
     """ Runs gulp to build the static files """
     pid = fork()
@@ -102,12 +117,16 @@ def buildStaticFiles():
             sys.exit(1)
 
 
+@spacer
 def setupApacheStuff():
     """ 
     Compiles the configuration file template for apache
     and creates the logs directory
     """
     os.chdir('apache_files/')
+    print "========================================"
+    print "Creating apache config and log directory"
+    print "========================================"
     with open('templates/site-template.conf', 'r') as f:
         template = f.read()
     conf_file = template.replace('_ROOT_DIR_', REPO_DIR) 
@@ -120,15 +139,17 @@ def setupApacheStuff():
         import errno
         if err.errno != errno.EEXIST:
             raise
+    print "Done!"
 
 
+@spacer
 def lastMessage():
     print """
 Setup completato!
 =================
 Ora puoi eseguire come amministratore
 
-apache_files/install.sh
+  apache_files/install.sh
 
 per installare il sito su macchina locale, 
 oppure copiare a mano le cartelle e il file 
