@@ -2,6 +2,7 @@
   "name": "teapot",
   "version": "0.2.0",
   "description": "Raschietto implementation",
+  "repository": "https://github.com/418imateapot/semantic_teapot",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
