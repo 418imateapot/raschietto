@@ -94,7 +94,7 @@ def buildStaticFiles():
         print "==================="
         os.chdir('static')
         gulp_path = which('gulp')
-        execv(gulp_path, ('gulp'))
+        execv(gulp_path, ('gulp',))
     else:
         status = waitpid(pid, 0)
         if status[1] != 0:
