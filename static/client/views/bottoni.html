@@ -1,1 +1,6 @@
-<div class="bottoni"></div>
+<div class="bottoni">
+	<label for="author">Find Author</label>
+	<input name="author" type="text" ng-model="searchAuthor" placeholder="url here!">
+	<a class="button primary" ng-click="gogo()">Search</a>
+</div>
+<p ng-bind="result"></p>
