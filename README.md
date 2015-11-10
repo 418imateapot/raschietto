@@ -6,7 +6,7 @@ Progetto di techweb 2015!!
 * server apache 2.4
 * python 2.7
 * python virtualenv
-* nodejs + npm (una versione recente magari.. consiglio di usare [nvm](https://github.com/creationix/nvm)
+* nodejs + npm (una versione recente magari.. consiglio di usare [nvm](https://github.com/creationix/nvm))
 * gulp (installare con "npm install --global gulp")
 
 
