@@ -1,6 +1,6 @@
-@import './_variables.scss';
-@import '../../bower_components/foundation/scss/normalize.scss';
-@import '../../bower_components/foundation/scss/foundation.scss';
+@import './_settings.scss';
+@import '../../node_modules/zurb-foundation-5/scss/normalize.scss';
+@import '../../node_modules/zurb-foundation-5/scss/foundation.scss';
 
 #tri-areas {
 	margin-top: 1em;

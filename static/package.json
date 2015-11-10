@@ -9,12 +9,10 @@
   "author": "",
   "license": "MIT",
   "browser": {
-    "jquery": "./bower_components/jquery/dist/jquery.js",
-    "foundation": "./bower_components/foundation/js/foundation/foundation.js"
+    "jquery": "./node_modules/jquery/dist/jquery.js"
   },
   "browserify-shim": {
-    "jquery": "$",
-    "foundation": "foundation"
+    "jquery": "$"
   },
   "browserify": {
     "transform": [
@@ -41,6 +39,8 @@
   },
   "dependencies": {
     "angular-foundation": "^0.8.0",
-    "angular-ui-router": "^0.2.15"
+    "angular-ui-router": "^0.2.15",
+    "jquery": "^2.1.4",
+    "zurb-foundation-5": "^5.4.7"
   }
 }
