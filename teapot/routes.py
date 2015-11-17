@@ -4,6 +4,7 @@ from flask.json import jsonify
 
 from . import app
 
+# Test routes
 @app.route('/')
 def hello():
     return "Ammazzaoh"
@@ -17,4 +18,6 @@ def spam():
         string += "spam "
     return string
 
+# Import other routes
+from docs import *
 from queries import *
