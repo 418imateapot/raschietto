@@ -1,14 +1,15 @@
 /* jshint esnext:true */
 export
 var bottoniCtrl = ['$scope', '$http',
-    function($scope, $http) {
-        $scope.searchAuthor = "";
-        $scope.result = "";
-        $scope.gogo = function() {
-            $http.get('/api/bottoni')
-                .then(function(res) {
-					$scope.result = res.data;
-                });
-        };
+    ($scope, $http) => {
+		$http.get('http://www.dlib.org/dlib/november14/beel/11beel.html')
+			.then(response => {
+				$scope.page = response.data;
+				console.log(response.data);
+			})
+			.catch(err => {
+				$scope.page = err;
+				console.log(err);
+			});
     }
 ];

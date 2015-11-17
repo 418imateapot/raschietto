@@ -1,11 +1,17 @@
 /* jshint esnext:true */
 export
-var docCtrl = ['$scope',
-    function($scope) {
-        $scope.docs = [{
-            title: 'Fisasrmonica',
-            short_desc: 'Funzionerà?'
-        }];
+var docCtrl = ['$scope', '$http',
+    function($scope, $http) {
+		$http.get('/api/docs')
+			.then((resp) => {
+				$scope.docs = resp.data;
+			})
+		.catch((err) =>{
+			console.log(err);
+		});
+		$scope.load = function(id) {
+			
+		};
     }
 ];
 
