@@ -89,6 +89,12 @@ gulp.task('js', function() {
         .pipe(gulp.dest(js_dest));
 });
 
+gulp.task('watch', function() {
+	gulp.watch(['client/js/**/*.jsx'], ['js']);
+	gulp.watch(['client/scss/*.scss'], ['sass']);
+	gulp.watch(['client/views/*.html', 'client/index.html'], ['copy']);
+});
+
 gulp.task('default', function() {
     sequence('clean', ['sass', 'js', 'copy']);
 });
