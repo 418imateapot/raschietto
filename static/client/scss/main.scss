@@ -13,6 +13,21 @@
 	max-width: initial;
 }
 
-#main-area {
+#show-document {
 	border-style: outset;
+}
+
+.animate-hide {
+	transition: all linear 1s;
+	line-height: 20px;
+	opacity: 1;
+	padding: 10px;
+	background: white;
+}
+
+.animate-hide.ng-hide {
+	transition: all linear 1s;
+	line-height: 0;
+	opacity: 0;
+	padding: 0 10px;
 }

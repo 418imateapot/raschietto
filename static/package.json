@@ -39,6 +39,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
+    "angular-animate": "^1.4.8",
     "angular-foundation": "^0.8.0",
     "angular-ui-router": "^0.2.15",
     "jquery": "^2.1.4",
