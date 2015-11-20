@@ -21,3 +21,9 @@ def spam():
 # Import other routes
 from docs import *
 from queries import *
+
+# Catch everything else
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catchAll(path):
+    return Response(status=404, response="{} Not Found".format(path))

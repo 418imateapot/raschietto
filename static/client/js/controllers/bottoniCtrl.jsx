@@ -2,7 +2,7 @@
 export
 var bottoniCtrl = ['$scope', '$http',
     ($scope, $http) => {
-		$http.get('http://www.dlib.org/dlib/november14/beel/11beel.html')
+		$http.get('/api/docs/11beel')
 			.then(response => {
 				$scope.page = response.data;
 				console.log(response.data);
