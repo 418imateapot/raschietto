@@ -1,7 +1,7 @@
 /* jshint esnext:true */
 export
-var docCtrl = ['$scope', '$http',
-    function($scope, $http) {
+var docCtrl = ['$scope', '$http', '$rootScope',
+    function($scope, $http, $rootScope) {
         $http.get('/api/docs')
             .then((resp) => {
                 $scope.docs = resp.data;
@@ -10,7 +10,7 @@ var docCtrl = ['$scope', '$http',
                 console.log(err);
             });
         $scope.load = function(id) {
-
+			$rootScope.$broadcast('change_document', {'doc_id': id});
         };
     }
 ];
@@ -23,14 +23,20 @@ var metaCtrl = ['$scope',
 ];
 
 export
-var mainCtrl = ['$scope', '$http', '$sce',
-    function($scope, $http, $sce) {
-        $http.get('/api/docs/11beel')
-            .then(response => {
-                $scope.content = $sce.trustAsHtml(response.data.content);
-            })
-            .catch(error =>
-                console.log(error)
-            );
-    }
-];
+var mainCtrl = ['$scope', '$http', '$sce', 'loadDocument',
+    function($scope, $http, $sce, loadDocument) {
+		$scope.loading = true;
+		loadDocument.get('11beel')
+			.then((doc)=>{
+				$scope.content = $sce.trustAsHtml(doc.resp);
+				$scope.loading = false;
+			});
+		$scope.$on('change_document', (event, args) => {
+			$scope.loading = true;
+			loadDocument.get(args.doc_id)
+				.then((doc)=>{
+					$scope.content = $sce.trustAsHtml(doc.resp);
+					$scope.loading = false;
+				});
+		});
+    }];

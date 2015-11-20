@@ -1,5 +1,5 @@
 <div ng-controller="docCtrl">
-    <div ng-repeat="doc in docs">
-		<h4>{{doc.title}}</h4>
-    </div>
+    <ul ng-repeat="doc in docs">
+		<li ng-click="load(doc.id)">{{doc.title}}</li>
+    </ul>
 </div>
