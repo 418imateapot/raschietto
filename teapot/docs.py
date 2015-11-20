@@ -26,5 +26,5 @@ def getDocument(id):
             if a['id'] == id:
                 page = requests.get(a['url']).content
                 return page
-    return Response(status=404, message="Not Found")
+    return Response(status=404, response="Not Found")
     
