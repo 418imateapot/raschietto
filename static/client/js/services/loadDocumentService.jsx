@@ -1,4 +1,11 @@
 /* jshint esnext: true */
+
+/**
+ * Servizio che, dato un url, chiede al server il documento corrispondente,
+ * restituendo un oggetto contenente l'html da visualizzare.
+ *
+ * @param url: indovina un po'
+ */
 export
 var loadDocumentService = ['$http',
     function($http) {

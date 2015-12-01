@@ -35,7 +35,8 @@ var docCtrl = ['$scope', '$http', '$rootScope',
 		 */
         $scope.load = function(url) {
             $rootScope.$broadcast('change_document', {
-                'doc_url': url
+                'doc_url': url,
+				'doc_expr': "something"
             });
         };
     }
@@ -48,6 +49,13 @@ export
 var metaCtrl = ['$scope',
     function($scope) {
         $scope.test = "ok";
+
+		/**
+		 *  TODO:
+		 *  Aspetta efento change_doc e carica annotazioni
+		 *  usando il parametro doc_expr
+		 */
+
     }
 ];
 
