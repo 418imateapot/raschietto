@@ -3,13 +3,13 @@ export
 var loadDocumentService = ['$http',
     function($http) {
         return {
-            get: function(id) {
+            get: function(url) {
 
-                return $http.get('/api/docs/' + id)
+                return $http.get('/api/docs?url=' + encodeURIComponent(url))
                     .then(response => {
                         return {
                             'status': 'ok',
-                            'resp': response.data.content
+                            'resp': response.data
                         };
                     })
                     .catch(error => {
