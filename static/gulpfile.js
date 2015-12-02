@@ -35,14 +35,24 @@ var index_dest = './build';
 // ==============
 // TASKS
 // ==============
+/**
+ * Ripulisce la directory build
+ */
 gulp.task('clean', function() {
     return del(['build/**/*']);
 });
 
+/**
+ * Come clean, ma cancella SOLO i file copiati,
+ * non quelli compilati
+ */
 gulp.task('clean:assets', function() {
     return del(['build/views/*', 'build/index.html']);
 });
 
+/**
+ * Compila e minifica i fogli di stile .scss
+ */
 gulp.task('sass', function() {
     return gulp.src(scss_src)
         .pipe(sass().on('error', sass.logError))
@@ -50,18 +60,35 @@ gulp.task('sass', function() {
         .pipe(gulp.dest(scss_dest));
 });
 
+/**
+ * Copia le views nella cartella build
+ */
 gulp.task('views', function() {
     return gulp.src(views_src)
         .pipe(gulp.dest(views_dest));
 });
+/**
+ * Copia index.html nella cartella build
+ */
 gulp.task('index', function() {
     return gulp.src(index_src)
         .pipe(gulp.dest(index_dest));
 });
+/**
+ * Esegue tutti i task relativi agli asset
+ */
 gulp.task('copy', function() {
     sequence('clean:assets', ['views', 'index']);
 });
 
+/**
+ * Ubertask javascript:
+ * + (Trans)compila js dalla versione ES6 a ES5 usando babel.
+ * + Risolve le dipendenze e compila tutto in un unico 
+ * 		file bundle usando browserify.
+ * + Minifica il bundle con uglify, se no ci troviamo con un
+ * 		mostro enorme da caricare via HTTP.
+ */
 gulp.task('js', function() {
     // set up the browserify instance on a task basis
     var b = browserify({
@@ -69,32 +96,40 @@ gulp.task('js', function() {
         debug: true
     });
 
-    // configure babel transpiler
+    // configura babel transpiler
     var babelConf = {
         'presets': ['es2015'],
         'extensions': ['.jsx']
     };
 
-    return b.transform('babelify', babelConf)
-        .bundle()
+    return b
+		.transform('babelify', babelConf)	// Transpiler
+        .bundle() 							// Infagotta tutto
         .pipe(source('app.js'))
-        .pipe(buffer())
-        .pipe(sourcemaps.init({
+        .pipe(buffer())						
+        .pipe(sourcemaps.init({				// Genera sourcemaps
             loadMaps: true
         }))
         // Add transformation tasks to the pipeline here.
-        //.pipe(uglify())
-        .on('error', gutil.log)
+        //.pipe(uglify())					// Minifica (ci mette un sacco)
+        .on('error', gutil.log)				// Logga errori
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(js_dest));
 });
 
+/**
+ * Monitora i file ed esegui i task appropriati
+ * ad ogni cambiamento
+ */
 gulp.task('watch', function() {
 	gulp.watch(['client/js/**/*.jsx'], ['js']);
 	gulp.watch(['client/scss/*.scss'], ['sass']);
 	gulp.watch(['client/views/*.html', 'client/index.html'], ['copy']);
 });
 
+/**
+ * default task: esegui tutti i task e infine watch
+ */
 gulp.task('default', function() {
-    sequence('clean', ['sass', 'js', 'copy']);
+    sequence('clean', ['sass', 'js', 'copy'], 'watch');
 });

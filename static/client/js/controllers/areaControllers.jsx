@@ -46,16 +46,17 @@ var docCtrl = ['$scope', '$http', '$rootScope',
  * Controller per la metaArea
  */
 export
-var metaCtrl = ['$scope',
-    function($scope) {
-        $scope.test = "ok";
-
-		/**
-		 *  TODO:
-		 *  Aspetta efento change_doc e carica annotazioni
-		 *  usando il parametro doc_expr
-		 */
-
+var metaCtrl = ['$scope', 'annotationService',
+    function($scope, annotationService) {
+		$scope.test = "ASDASD";
+        $scope.$on('change_document', (event, args) => {
+			annotationService.get(args.doc_url)
+				.then(resp => {
+					console.log(resp.status);
+					console.log(resp.data);
+					console.log(resp.endpoint);
+				}).catch(err => consol.log(err));
+		});
     }
 ];
 

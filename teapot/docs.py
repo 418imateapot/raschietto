@@ -10,10 +10,10 @@ def getBottoni():
     return "OK"
 
 #@app.route('/docs')
-def getDocumentList():
-    """ Carica lista di documenti da disco """
-    cache_path = path.join(path.dirname(path.realpath(__file__)), '../data')
-    return send_from_directory(cache_path, 'doclist.json')
+#def getDocumentList():
+#    """ Carica lista di documenti da disco """
+#    cache_path = path.join(path.dirname(path.realpath(__file__)), '../data')
+#    return send_from_directory(cache_path, 'doclist.json')
 
 
 @app.route('/docs')

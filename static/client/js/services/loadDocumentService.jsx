@@ -11,7 +11,6 @@ var loadDocumentService = ['$http',
     function($http) {
         return {
             get: function(url) {
-
                 return $http.get('/api/docs?url=' + encodeURIComponent(url))
                     .then(response => {
                         return {
