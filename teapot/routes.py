@@ -1,29 +1,25 @@
-from flask import render_template
+# encoding: utf-8
+from os import path
+from flask import json, request, Response, send_from_directory
 from SPARQLWrapper import SPARQLWrapper
-from flask.json import jsonify
 
+from .boris.getDoc import getDoc
 from . import app
 
-# Test routes
-@app.route('/')
-def hello():
-    return "Ammazzaoh"
+@app.route('/docs', methods=['GET'])
+def getDocument():
+    '''
+    Dato un url, restituisce l'html del documento corrispondente
+    '''
+    doc_url = request.args.get('url')
+    return getDoc(doc_url)
 
-@app.route('/spam')
-def spam():
-    string = ""
-    for i in range (0,1000):
-        if i%15 == 0:
-            string += "\n"
-        string += "spam "
-    return string
 
-# Import other routes
-from docs import *
-from queries import *
-
-# Catch everything else
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catchAll(path):
+    '''
+    Restituisci 404 per tutte le route che non fanno
+    match con nulla
+    '''
     return Response(status=404, response="{} Not Found".format(path))

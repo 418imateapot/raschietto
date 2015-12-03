@@ -4,8 +4,8 @@ import os
 from flask import Flask
 
 app = Flask(__name__)
-app.config.from_object("__main__")
-app.debug=True
+app.config.from_object("__main__") # Serve ancora a qualcosa? boh!
+app.debug=True                      # TODO: disattivare per la consegna
 
 import routes
 

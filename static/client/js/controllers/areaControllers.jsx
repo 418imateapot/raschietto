@@ -6,26 +6,28 @@
 export
 var docCtrl = ['$scope', '$http', '$rootScope',
     function($scope, $http, $rootScope) {
-        var query = 'PREFIX fabio: <http://purl.org/spar/fabio/>' +
-					'PREFIX dcterms: <http://purl.org/dc/terms/>' +
-					'SELECT ?url ?title {' +
-					'GRAPH <http://vitali.web.cs.unibo.it/raschietto/graph/ltw1543> {' +
-					'	?x a fabio:Expression;' +
-					'		dcterms:title ?title;' +
-					'		fabio:hasRepresentation ?url.' +
-				   	'}}';
+        var query = `
+			PREFIX fabio: <http://purl.org/spar/fabio/>
+			PREFIX dcterms: <http://purl.org/dc/terms/>
+			SELECT ?url ?title {
+				GRAPH <http://vitali.web.cs.unibo.it/raschietto/graph/ltw1543> {
+					?x a fabio:Expression;
+						dcterms:title ?title;
+						fabio:hasRepresentation ?url.
+				   	}
+			}`; // Backtick, non virgoletta semplice
 
         var encodedQuery = encodeURIComponent(query);
-		
+		var query_url =`http://tweb2015.cs.unibo.it:8080/data?query=${encodedQuery}&format=json&callback=JSON_CALLBACK`; // ES6 Template String!
+
         /*
 		 * Recupera i titoli dei doc dal triplestore
 		 */
-        $http.jsonp('http://tweb2015.cs.unibo.it:8080/data?query=' + encodedQuery + '&format=json&callback=JSON_CALLBACK')
-            .then(function(response) {
+        $http.jsonp(query_url)
+            .then(response => {
                 $scope.urls = response.data.results.bindings;
-                console.log(response.data.results.bindings);
             })
-            .catch(function(err) {
+            .catch(err => {
                 console.log(err);
             });
 
@@ -33,7 +35,7 @@ var docCtrl = ['$scope', '$http', '$rootScope',
 		 *	Notifica il mainController che vuoi caricare un nuovo doc
 		 *	@param url: l'url del documento da caricare
 		 */
-        $scope.load = function(url) {
+        $scope.load = (url) => {
             $rootScope.$broadcast('change_document', {
                 'doc_url': url,
 				'doc_expr': "something"
@@ -51,11 +53,10 @@ var metaCtrl = ['$scope', 'annotationService',
 		$scope.test = "ASDASD";
         $scope.$on('change_document', (event, args) => {
 			annotationService.get(args.doc_url)
-				.then(resp => {
-					console.log(resp.status);
-					console.log(resp.data);
-					console.log(resp.endpoint);
-				}).catch(err => consol.log(err));
+				.then(response => {
+					console.log(response);
+					$scope.annotations = response.body.results.bindings;
+				}).catch(err => console.log(err));
 		});
     }
 ];
@@ -68,6 +69,7 @@ export
 var mainCtrl = ['$scope', '$http', '$sce', 'loadDocument',
     function($scope, $http, $sce, loadDocument) {
         $scope.loading = true;		// Usato per l'animazione
+		//TODO: carica un default in maniera meno triste
         loadDocument.get('http://www.dlib.org/dlib/november14/beel/11beel.html')
             .then((doc) => {
                 $scope.content = $sce.trustAsHtml(doc.resp.content);
