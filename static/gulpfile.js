@@ -128,6 +128,13 @@ gulp.task('watch', function() {
 });
 
 /**
+ * build task: esegui tutti i task tranne watch
+ */
+gulp.task('build', function() {
+    sequence('clean', ['sass', 'js', 'copy']);
+});
+
+/**
  * default task: esegui tutti i task e infine watch
  */
 gulp.task('default', function() {
