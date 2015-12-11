@@ -7,8 +7,8 @@
  * @param url: indovina un po'
  */
 export
-var loadDocumentService = ['$http',
-    function($http) {
+var documentService = ['$http',
+    function docLoaderFactory($http) {
         return {
             get: function(url) {
                 return $http.get('/api/docs?url=' + encodeURIComponent(url))

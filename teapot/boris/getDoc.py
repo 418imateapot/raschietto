@@ -34,11 +34,13 @@ def fix_links(content, absolute_prefix):
 
     return content
 
+
 def removeFileName(url_string):
     """ Rimuove l'ultimo segmento da un URL """
     components = url_string.split('/')
     components.pop(-1)
     return '/'.join(components)
+
 
 def getDoc(url_string):
     url = urlparse.urlparse(url_string)

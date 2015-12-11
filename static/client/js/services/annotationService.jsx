@@ -6,37 +6,52 @@
  *
  * @param url: indovina un po'
  */
+
+var query_template = function(expr) {
+    // Usa i nuovi template string di ES6
+    return `
+			PREFIX oa: <http://www.w3.org/ns/oa#>
+			PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+			PREFIX frbr: <http://purl.org/vocab/frbr/core#>
+			prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+			prefix raschietto: <http://vitali.web.cs.unibo.it/raschietto/>
+			SELECT ?type ?provenance ?object ?label ?fragment ?start ?end
+			WHERE {
+			  ?x a oa:Annotation;
+				raschietto:type ?type;
+				oa:annotatedBy ?provenance;
+				oa:hasBody ?body.
+			  ?body rdf:subject <${expr}>;
+				rdf:object ?object.
+			  OPTIONAL{?object rdfs:label ?label.}
+			  OPTIONAL{
+				?x oa:hasTarget ?target.
+				?target oa:hasSelector ?selector.
+				?selector rdf:value ?fragment;
+				  oa:start ?start;
+				  oa:end ?end.
+			  }
+			}
+			`; // Sono backtick, non virgolette semplici
+};
+
 export
 var annotationService = ['$http',
-    function($http) {
-		var promise;
-		var service = {
+    function annotationLoaderFactory($http) {
+        var promise;
+        var service = {
+            // Unico metodo di AnnotationService.
+            // Restituisce la promessa del risultato di una query gigante
+            // sul documento passato come arg.
             get: function(url) {
-				var query_template = (expr) => {
-					// Usa i nuovi template string di ES6
-					return `
-					PREFIX raschietto: <http://vitali.web.cs.unibo.it/raschietto/>
-					PREFIX oa: <http://www.w3.org/ns/oa#>
-					PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-					PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-					SELECT ?title
-					WHERE {
-						?anno a oa:Annotation;
-							raschietto:type "hasTitle";
-							oa:hasBody ?body.
-						?body rdf:subject <${expr}>;
-						rdf:object ?title.
-					}
-					`; // Sono backtick, non virgolette semplici
-				};
-
-				var expression = url.replace(/\.html$/, "_ver1"); // Converti brutalmente da fabio:Item a fabio:Expression
-				var encodedQuery = encodeURIComponent(query_template(expression));
-				var url_string = 'http://tweb2015.cs.unibo.it:8080/data?query=' + 
-									encodedQuery + 
-									'&format=json&callback=JSON_CALLBACK';
-					promise =  $http.jsonp(url_string)
-						.then(response => {
+                // Converti brutalmente da fabio:Item a fabio:Expression
+                var expression = url.replace(/\.html$/, "_ver1");
+                var encodedQuery = encodeURIComponent(query_template(expression));
+                var url_string = 'http://tweb2015.cs.unibo.it:8080/data?query=' +
+                    encodedQuery +
+                    '&format=json&callback=JSON_CALLBACK';
+                promise = $http.jsonp(url_string)
+                    .then(response => {
                         return {
                             'status': 'ok',
                             'body': response.data,
@@ -48,9 +63,9 @@ var annotationService = ['$http',
                             'error': error
                         };
                     });
-					return promise;
+                return promise;
             }
         };
-				 return service;
+        return service;
     }
 ];

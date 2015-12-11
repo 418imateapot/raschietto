@@ -11,7 +11,7 @@ import {router} from 'angular-ui-router';
 import {routes} from './routes.jsx';
 import {mainCtrl, docCtrl, metaCtrl} from './controllers/areaControllers.jsx';
 import {bottoniCtrl} from './controllers/bottoniCtrl.jsx';
-import {loadDocumentService} from './services/loadDocumentService.jsx';
+import {documentService} from './services/documentService.jsx';
 import {annotationService} from './services/annotationService.jsx';
 
 /**
@@ -27,5 +27,5 @@ angular.module('teapot', ['mm.foundation', 'ui.router', 'ngAnimate'])
     .controller('mainCtrl', mainCtrl)
     .controller('bottoniCtrl', bottoniCtrl)
 	/* Registra I SERVIZI */
-	.factory('loadDocument', loadDocumentService)
+	.factory('documentService', documentService)
 	.factory('annotationService', annotationService);

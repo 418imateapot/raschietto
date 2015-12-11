@@ -54,7 +54,7 @@ var metaCtrl = ['$scope', 'annotationService',
         $scope.$on('change_document', (event, args) => {
 			annotationService.get(args.doc_url)
 				.then(response => {
-					console.log(response);
+					console.log(response.body.results);
 					$scope.annotations = response.body.results.bindings;
 				}).catch(err => console.log(err));
 		});
@@ -66,11 +66,11 @@ var metaCtrl = ['$scope', 'annotationService',
  * Controller per la mainArea
  */
 export
-var mainCtrl = ['$scope', '$http', '$sce', 'loadDocument',
-    function($scope, $http, $sce, loadDocument) {
+var mainCtrl = ['$scope', '$http', '$sce', 'documentService',
+    function($scope, $http, $sce, documentService) {
         $scope.loading = true;		// Usato per l'animazione
 		//TODO: carica un default in maniera meno triste
-        loadDocument.get('http://www.dlib.org/dlib/november14/beel/11beel.html')
+        documentService.get('http://www.dlib.org/dlib/november14/beel/11beel.html')
             .then((doc) => {
                 $scope.content = $sce.trustAsHtml(doc.resp.content);
                 $scope.loading = false;
@@ -83,7 +83,7 @@ var mainCtrl = ['$scope', '$http', '$sce', 'loadDocument',
             $scope.loading = true;		// Usato per l'animazione
 			// Chiama il servizio loadDocument per 
 			// caricare un nuovo documento (duh)
-            loadDocument.get(args.doc_url)
+            documentService.get(args.doc_url)
                 .then((doc) => {
 					// $sce dice ad angular di _non_ fare escape dell'html
                     $scope.content = $sce.trustAsHtml(doc.resp.content);
