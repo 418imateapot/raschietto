@@ -84,7 +84,7 @@ gulp.task('copy', function() {
 /**
  * Ubertask javascript:
  * + (Trans)compila js dalla versione ES6 a ES5 usando babel.
- * + Risolve le dipendenze e compila tutto in un unico 
+ * + Risolve le dipendenze e compila tutto in un unico
  * 		file bundle usando browserify.
  * + Minifica il bundle con uglify, se no ci troviamo con un
  * 		mostro enorme da caricare via HTTP.
@@ -106,7 +106,7 @@ gulp.task('js', function() {
 		.transform('babelify', babelConf)	// Transpiler
         .bundle() 							// Infagotta tutto
         .pipe(source('app.js'))
-        .pipe(buffer())						
+        .pipe(buffer())
         .pipe(sourcemaps.init({				// Genera sourcemaps
             loadMaps: true
         }))

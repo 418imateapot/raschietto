@@ -11,7 +11,7 @@ def fix_links(content, absolute_prefix):
     Rewrite relative links to be absolute links based on certain URL.
     Courtesy of https://stackoverflow.com/questions/26167690/lxml-how-to-change-img-src-to-absolute-link
 
-    @param content: HTML object 
+    @param content: HTML object
     """
     def join(base, url):
         """
@@ -55,7 +55,7 @@ def getDoc(url_string):
     full_content = my_page.xpath('//table[3]//table[5]//table[1]//td[2]')
     full_content = fix_links(full_content[0], url_string)
     result = {
-            'title': title[0].text_content(), 
+            'title': title[0].text_content(),
             'content': etree.tostring(full_content)
             }
 

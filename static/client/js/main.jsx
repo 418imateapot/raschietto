@@ -15,7 +15,7 @@ import {documentService} from './services/documentService.jsx';
 import {annotationService} from './services/annotationService.jsx';
 
 /**
- * Registra tutti i componenti dell'applicazione 
+ * Registra tutti i componenti dell'applicazione
  * col modulo angular principale
  */
 angular.module('teapot', ['mm.foundation', 'ui.router', 'ngAnimate'])

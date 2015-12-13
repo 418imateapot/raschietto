@@ -17,7 +17,7 @@ Progetto di techweb 2015!!
     $ git clone https://github.com/418imateapot/semantic_teapot.git
     ```
 2. Eseguire lo script di setup
-  
+
   ```bash
   $ semantic_teapot/setup.py
   ```

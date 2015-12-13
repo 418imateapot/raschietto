@@ -17,20 +17,20 @@ var query_template = function(expr) {
 			prefix raschietto: <http://vitali.web.cs.unibo.it/raschietto/>
 			SELECT ?type ?provenance ?object ?label ?fragment ?start ?end
 			WHERE {
-			  ?x a oa:Annotation;
-				raschietto:type ?type;
-				oa:annotatedBy ?provenance;
-				oa:hasBody ?body.
-			  ?body rdf:subject <${expr}>;
-				rdf:object ?object.
-			  OPTIONAL{?object rdfs:label ?label.}
-			  OPTIONAL{
-				?x oa:hasTarget ?target.
-				?target oa:hasSelector ?selector.
-				?selector rdf:value ?fragment;
-				  oa:start ?start;
-				  oa:end ?end.
-			  }
+				?x a oa:Annotation;
+					raschietto:type ?type;
+					oa:annotatedBy ?provenance;
+					oa:hasBody ?body.
+				?body rdf:subject <${expr}>;
+					rdf:object ?object.
+				OPTIONAL{?object rdfs:label ?label.}
+				OPTIONAL{
+					?x oa:hasTarget ?target.
+					?target oa:hasSelector ?selector.
+					?selector rdf:value ?fragment;
+						oa:start ?start;
+						oa:end ?end.
+				}
 			}
 			`; // Sono backtick, non virgolette semplici
 };

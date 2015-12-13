@@ -54,7 +54,7 @@ def makeVirtualenv(name=VIRTUALENV_NAME):
     pid = fork()
     if pid == 0:
         virtualenv_executable = which('virtualenv')
-        execv(virtualenv_executable, ('virtualenv', name)) 
+        execv(virtualenv_executable, ('virtualenv', name))
     else:
         status = waitpid(pid, 0)
         if status[1] != 0:
@@ -119,7 +119,7 @@ def buildStaticFiles():
 
 @spacer
 def setupApacheStuff():
-    """ 
+    """
     Compiles the configuration file template for apache
     and creates the logs directory
     """
@@ -129,7 +129,7 @@ def setupApacheStuff():
     print "========================================"
     with open('templates/site-template.conf', 'r') as f:
         template = f.read()
-    conf_file = template.replace('_ROOT_DIR_', REPO_DIR) 
+    conf_file = template.replace('_ROOT_DIR_', REPO_DIR)
     with open('010-raschietto.conf', 'w') as f:
        f.write(conf_file)
     os.chdir(REPO_DIR)
@@ -151,9 +151,9 @@ Ora puoi eseguire come amministratore
 
   apache_files/install.sh
 
-per installare il sito su macchina locale, 
-oppure copiare a mano le cartelle e il file 
-"apache_files/renameme.htaccess" sul server 
+per installare il sito su macchina locale,
+oppure copiare a mano le cartelle e il file
+"apache_files/renameme.htaccess" sul server
 remoto per mettere su tutta la baracca
 """
 
