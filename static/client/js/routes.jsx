@@ -35,13 +35,7 @@ var routes = ['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 },
             }
 
-        })
-
-        /* TODO: Da cancellare?? */
-        .state('bottoni', {
-            url: '/bottoni',
-            templateUrl: 'views/bottoni.html',
-            controller: 'bottoniCtrl'
         });
+
     }
 ];

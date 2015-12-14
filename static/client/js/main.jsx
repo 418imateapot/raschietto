@@ -10,7 +10,6 @@ import {router} from 'angular-ui-router';
 // Componenti dell'applicazione
 import {routes} from './routes.jsx';
 import {mainCtrl, docCtrl, metaCtrl} from './controllers/areaControllers.jsx';
-import {bottoniCtrl} from './controllers/bottoniCtrl.jsx';
 import {documentService} from './services/documentService.jsx';
 import {annotationService} from './services/annotationService.jsx';
 
@@ -25,7 +24,6 @@ angular.module('teapot', ['mm.foundation', 'ui.router', 'ngAnimate'])
     .controller('docCtrl', docCtrl)
     .controller('metaCtrl', metaCtrl)
     .controller('mainCtrl', mainCtrl)
-    .controller('bottoniCtrl', bottoniCtrl)
 	/* Registra I SERVIZI */
 	.factory('documentService', documentService)
 	.factory('annotationService', annotationService);
