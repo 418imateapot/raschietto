@@ -1,23 +1,25 @@
 # encoding: utf-8
-from os import path
-from flask import json, request, Response, send_from_directory
-from SPARQLWrapper import SPARQLWrapper
+"""
+Gestisce il routing per l'api server-side di raschietto
+"""
+from flask import request, Response
 
-from .boris.getDoc import getDoc
+from .boris.documents import get_doc
 from . import app
 
+
 @app.route('/docs', methods=['GET'])
-def getDocument():
+def get_document():
     '''
     Dato un url, restituisce l'html del documento corrispondente
     '''
     doc_url = request.args.get('url')
-    return getDoc(doc_url)
+    return get_doc(doc_url)
 
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
-def catchAll(path):
+def catch_all(path):
     '''
     Restituisci 404 per tutte le route che non fanno
     match con nulla

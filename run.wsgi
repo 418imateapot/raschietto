@@ -7,7 +7,8 @@ Prepara l'ambiente prima di importare
 l'applicazione flask
 '''
 
-import os, sys
+import os
+import sys
 
 # Ottieni il path assoluto della cartella cgi
 binpath = os.path.dirname(os.path.realpath(__file__))
@@ -20,4 +21,4 @@ execfile(activate_this, dict(__file__=activate_this))
 sys.path.insert(0, binpath)
 
 # Importa l'applicazione flask come applicazione wsgi
-from teapot import app as application
+from teapot import app as application  # NOQA  Ignora "errore"

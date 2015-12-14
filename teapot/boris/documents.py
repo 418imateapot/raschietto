@@ -1,4 +1,7 @@
 # coding: utf-8
+"""
+Funzioni utili per recuperare i documenti dai server remoti
+"""
 
 from lxml import html, etree
 import httplib
@@ -9,7 +12,9 @@ import json
 def fix_links(content, absolute_prefix):
     """
     Rewrite relative links to be absolute links based on certain URL.
-    Courtesy of https://stackoverflow.com/questions/26167690/lxml-how-to-change-img-src-to-absolute-link
+    Courtesy of
+    https://stackoverflow.com/questions/26167690/
+    lxml-how-to-change-img-src-to-absolute-link
 
     @param content: HTML object
     """
@@ -42,7 +47,7 @@ def removeFileName(url_string):
     return '/'.join(components)
 
 
-def getDoc(url_string):
+def get_doc(url_string):
     url = urlparse.urlparse(url_string)
     conn = httplib.HTTPConnection(url.hostname)
     conn.request("GET", url.path)
@@ -55,8 +60,8 @@ def getDoc(url_string):
     full_content = my_page.xpath('//table[3]//table[5]//table[1]//td[2]')
     full_content = fix_links(full_content[0], url_string)
     result = {
-            'title': title[0].text_content(),
-            'content': etree.tostring(full_content)
-            }
+        'title': title[0].text_content(),
+        'content': etree.tostring(full_content)
+        }
 
     return json.JSONEncoder().encode(result)

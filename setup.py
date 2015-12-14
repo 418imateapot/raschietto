@@ -1,11 +1,12 @@
 #!/usr/bin/env python2
 # coding: utf-8
 
-import os, sys
+import os
+import sys
 from os import path, fork, execv, waitpid
 
 REPO_DIR = path.dirname(path.realpath(__file__))
-CURRENT_DIR= os.getcwd()
+CURRENT_DIR = os.getcwd()
 VIRTUALENV_NAME = 'env'
 REQ_FILE = path.join(path.dirname(path.realpath(__file__)), 'requirements.txt')
 
@@ -13,7 +14,7 @@ REQ_FILE = path.join(path.dirname(path.realpath(__file__)), 'requirements.txt')
 def spacer(func):
     """ Decorator to space the output of my functions """
     def inner(*args, **kwargs):
-        for i in range(1,4):
+        for i in range(1, 4):
             print ""
         return func(*args, **kwargs)
     return inner
@@ -29,7 +30,7 @@ def which(program):
         if is_exe(program):
             return program
     else:
-        for path in os.environ["PATH"].split(os.pathsep):
+        for path in os.environ["PATH"].split(os.pathsep):  # noqa
             path = path.strip('"')
             exe_file = os.path.join(path, program)
             if is_exe(exe_file):
@@ -50,7 +51,7 @@ def makeVirtualenv(name=VIRTUALENV_NAME):
     print "=================================="
     print "Setting up the virtual environment"
     print "=================================="
-    VIRTUALENV_NAME = name
+    VIRTUALENV_NAME = name  # noqa
     pid = fork()
     if pid == 0:
         virtualenv_executable = which('virtualenv')
@@ -70,7 +71,7 @@ def installPyLibs(requirements_file=REQ_FILE):
     print "===================================="
     pid = fork()
     if pid == 0:
-        pip_executable = path.join(REPO_DIR, VIRTUALENV_NAME,'bin/pip')
+        pip_executable = path.join(REPO_DIR, VIRTUALENV_NAME, 'bin/pip')
         execv(pip_executable,
               ('pip', 'install', '-r',  requirements_file))
     else:
@@ -131,7 +132,7 @@ def setupApacheStuff():
         template = f.read()
     conf_file = template.replace('_ROOT_DIR_', REPO_DIR)
     with open('010-raschietto.conf', 'w') as f:
-       f.write(conf_file)
+        f.write(conf_file)
     os.chdir(REPO_DIR)
     try:
         os.mkdir(os.path.join(REPO_DIR, 'logs'), 0755)
