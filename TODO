@@ -1,5 +1,16 @@
 * Autenticazione (Semplice!)
+* Inserire nuove annotazioni (lato client)
+* Inserire nuove annotazioni (lato server)
 * Visualizzare i risultati delle query.
 * modificare teapot/boris/getdoc.py per gestire siti oltre a dlib.org.
 * scrivere uno script per aggiungere automaticamente nuovi documenti (Expression, Item, Work e creator) al triple store
 * Creare i filtri per le query (es: visualizzare solo "hasAuthor") -OPZIONALE-
+
+* LO SCRAPER!
+    Per il momento deve ricavare dal documento:
+    - Titolo
+    - Autore
+    - DOI
+    - l'url lo sappiamo già
+    - anno di pubblicazione
+    inoltre per fare l'annotazione ci serve l'xpath di
