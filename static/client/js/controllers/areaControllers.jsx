@@ -54,8 +54,7 @@ var metaCtrl = ['$scope', 'annotationService',
         $scope.$on('change_document', (event, args) => {
             annotationService.get(args.doc_url)
                 .then(response => {
-                    console.log(response.body.results);
-                    $scope.annotations = response.body.results.bindings;
+                    $scope.annotations = annotationService.tidy(response.body);
                 }).catch(err => console.log(err));
         });
     }

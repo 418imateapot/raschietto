@@ -1,5 +1,7 @@
 <div ng-controller="metaCtrl">
-	<ul ng-repeat="anno in annotations">
-		<li>{{ anno.title.value }}</li>
-	</ul>
+	<div ng-repeat="anno in annotations">
+            <ul ng-repeat="item in anno">
+		<li>{{ item.label.value }}</li>
+            </ul>
+	</div>
 </div>
