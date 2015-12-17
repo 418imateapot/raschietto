@@ -14,7 +14,7 @@ then
     # then aggiungilo sulla riga dopo "Listen 80"
     # (che in genere c'è)
     grep -q -F  "Listen 8080" /etc/apache2/ports.conf\
-    || sed -r 's/^(Listen 80)$/\1\nListen 8080/' /etc/apache2/ports.conf \
+    || sed -i -r 's/^(Listen 80)$/\1\nListen 8080/' /etc/apache2/ports.conf \
     && a2ensite "010-raschietto" \
     && apache2ctl restart
 fi
