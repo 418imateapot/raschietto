@@ -50,7 +50,6 @@ var docCtrl = ['$scope', '$http', '$rootScope',
 export
 var metaCtrl = ['$scope', 'annotationService',
     function($scope, annotationService) {
-        $scope.test = "ASDASD";
         $scope.$on('change_document', (event, args) => {
             annotationService.get(args.doc_url)
                 .then(response => {

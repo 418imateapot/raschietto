@@ -6,7 +6,7 @@
             <accordion-heading>
                 Documenti <i class="right" ng-class="{'fa fa-chevron-down': docOpen, 'fa fa-chevron-right': !docOpen}"></i>
             </accordion-heading>
-            <div ui-view="doc" id="doc-area"></div>
+            <doc-area id="doc-area"></doc-area>
         </accordion-group>
 
         <!-- META area -->
@@ -14,10 +14,10 @@
             <accordion-heading>
                 Annotazioni <i class="right" ng-class="{'fa fa-chevron-down': metaOpen, 'fa fa-chevron-right': !metaOpen}"></i>
             </accordion-heading>
-            <div ui-view="meta" id="meta-area"></div>
+            <meta-area id="meta-area"></meta-area>
         </accordion-group>
 
     </accordion>
     <!-- MAIN area -->
-    <div id="main-area" ui-view="main" class="small-9 columns"></div>
+    <main-area id="main-area" class="small-9 columns"></main-area>
 </div>

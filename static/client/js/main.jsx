@@ -12,6 +12,9 @@ import {routes} from './routes.jsx';
 import {mainCtrl, docCtrl, metaCtrl} from './controllers/areaControllers.jsx';
 import {documentService} from './services/documentService.jsx';
 import {annotationService} from './services/annotationService.jsx';
+import {mainArea} from './directives/mainArea.jsx';
+import {docArea} from './directives/docArea.jsx';
+import {metaArea} from './directives/metaArea.jsx';
 
 /**
  * Registra tutti i componenti dell'applicazione
@@ -24,6 +27,10 @@ angular.module('teapot', ['mm.foundation', 'ui.router', 'ngAnimate'])
     .controller('docCtrl', docCtrl)
     .controller('metaCtrl', metaCtrl)
     .controller('mainCtrl', mainCtrl)
+        /* Registra le DIRECTIVES */
+    .directive('mainArea', mainArea)
+    .directive('docArea', docArea)
+    .directive('metaArea', metaArea)
 	/* Registra I SERVIZI */
-	.factory('documentService', documentService)
-	.factory('annotationService', annotationService);
+    .factory('documentService', documentService)
+    .factory('annotationService', annotationService);

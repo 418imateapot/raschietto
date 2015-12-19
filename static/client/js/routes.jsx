@@ -16,25 +16,10 @@ var routes = ['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
         /**
          * /home è la pagina principale e forse sarà l'unica.
-         * Contiene tre views annidate (doc, main, meta)
          */
             .state('home', {
             url: '/home',
-            views: {
-                '': {
-                    templateUrl: 'views/home.html'
-                },
-                'doc@home': {
-                    templateUrl: 'views/docArea.html'
-                },
-                'meta@home': {
-                    templateUrl: 'views/metaArea.html'
-                },
-                'main@home': {
-                    templateUrl: 'views/mainArea.html'
-                },
-            }
-
+            templateUrl: 'views/home.html'
         });
 
     }
