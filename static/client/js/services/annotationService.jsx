@@ -6,7 +6,7 @@
  * Servizio che, dato un url, chiede al triplestore le annotazioni
  * sulla fabio:Expression corrispondente
  *
- * @param url: indovina un po'
+ * @param url: string indovine un po'
  */
 
 function query_template(expr) {
@@ -20,23 +20,23 @@ function query_template(expr) {
 
         SELECT ?type ?provenance ?predicate ?object ?label ?innerObject ?fragment ?start ?end ?src
         WHERE {
-          ?x a oa:Annotation;
-            raschietto:type ?type;
-            oa:annotatedBy ?provenance;
-            oa:hasBody ?body.
-          ?body rdf:subject <http://www.dlib.org/dlib/november14/jahja/11jahja_ver1>;
-            rdf:predicate ?predicate;
-            rdf:object ?object.
-          OPTIONAL{?object rdfs:label ?label.}
-          OPTIONAL{?object rdf:subject ?innerObject. }
-          OPTIONAL{
-            ?x oa:hasTarget ?target.
+            ?x a oa:Annotation;
+                raschietto:type ?type;
+                oa:annotatedBy ?provenance;
+                oa:hasBody ?body.
+            ?body rdf:subject <http://www.dlib.org/dlib/november14/jahja/11jahja_ver1>;
+                rdf:predicate ?predicate;
+                rdf:object ?object.
+            OPTIONAL{?object rdfs:label ?label.}
+            OPTIONAL{?object rdf:subject ?innerObject. }
+            OPTIONAL{
+                ?x oa:hasTarget ?target.
                 ?target oa:hasSelector ?selector.
-            ?target oa:hasSource ?src.
-            ?selector rdf:value ?fragment;
-              oa:start ?start;
-              oa:end ?end.
-          }
+                ?target oa:hasSource ?src.
+                ?selector rdf:value ?fragment;
+                    oa:start ?start;
+                    oa:end ?end.
+            }
         }
     `; // Sono backtick, non virgolette semplici
 }
@@ -68,16 +68,15 @@ var annotationService = ['$http',
         }
 
         var service = {
-            // Unico metodo di AnnotationService.
             // Restituisce la promessa del risultato di una query gigante
             // sul documento passato come arg.
             get: function(url) {
                 // Converti brutalmente da fabio:Item a fabio:Expression
                 var expression = url.replace(/\.html$/, "_ver1");
                 var encodedQuery = encodeURIComponent(query_template(expression));
-                var url_string = 'http://tweb2015.cs.unibo.it:8080/data?query=' +
-                    encodedQuery +
-                    '&format=json&callback=JSON_CALLBACK';
+                var endpoint = 'http://tweb2015.cs.unibo.it:8080/data';
+                var opts = 'format=json&callback=JSON_CALLBACK';
+                var url_string = `${endpoint}?query=${encodedQuery}&${opts}`;
                 promise = $http.jsonp(url_string)
                     .then(response => {
                         return {
@@ -94,9 +93,9 @@ var annotationService = ['$http',
                 return promise;
             },
 
+            // Convalida i risultati e li riorganizza
+            // in un formato più appetibile
             tidy: function(data) {
-                // Convalida i risultati e li riorganizza
-                // in un formato più appetibile
                 var items = data.results.bindings;
                 var result = {
                     title: [],
@@ -193,10 +192,10 @@ var annotationService = ['$http',
                             break;
                         default:
                             continue;
-                    }
-                }
+                    } // END switch (type)
+                } // END for (var i in items)
                 return result;
-            }
+            } // END tidy(data)
         };
         return service;
     }
