@@ -19,7 +19,8 @@ var routes = ['$stateProvider', '$urlRouterProvider', '$locationProvider',
          */
             .state('home', {
             url: '/home',
-            templateUrl: 'views/home.html'
+            templateUrl: 'views/homeView.html',
+            controller: 'bossCtrl'
         });
 
     }

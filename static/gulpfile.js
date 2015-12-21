@@ -19,13 +19,14 @@ var gutil = require('gulp-util');
 var sass = require('gulp-sass');
 var sequence = require('run-sequence');
 var rename = require('gulp-rename');
+var flatten = require('gulp-flatten');
 
 // ==============
 // VARIABLES
 // ==============
 var js_src = './client/js/main.jsx';
 var scss_src = './client/scss/main.scss';
-var views_src = './client/views/*.html';
+var views_src = './client/**/*View.html';
 var index_src = './client/index.html';
 var js_dest = './build/js/';
 var scss_dest = './build/css/';
@@ -65,6 +66,7 @@ gulp.task('sass', function() {
  */
 gulp.task('views', function() {
     return gulp.src(views_src)
+        .pipe(flatten())
         .pipe(gulp.dest(views_dest));
 });
 /**
@@ -99,20 +101,20 @@ gulp.task('js', function() {
     // configura babel transpiler
     var babelConf = {
         'presets': ['es2015'],
-        'extensions': ['.jsx']
+        'extensions': ['.jsx', '.js']
     };
 
     return b
-		.transform('babelify', babelConf)	// Transpiler
-        .bundle() 							// Infagotta tutto
+        .transform('babelify', babelConf)	// Transpiler
+        .bundle() 				// Infagotta tutto
         .pipe(source('app.js'))
         .pipe(buffer())
-        .pipe(sourcemaps.init({				// Genera sourcemaps
+        .pipe(sourcemaps.init({			// Genera sourcemaps
             loadMaps: true
         }))
         // Add transformation tasks to the pipeline here.
-        //.pipe(uglify())					// Minifica (ci mette un sacco)
-        .on('error', gutil.log)				// Logga errori
+        //.pipe(uglify())			// Minifica (ci mette un sacco)
+        .on('error', gutil.log)			// Logga errori
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(js_dest));
 });

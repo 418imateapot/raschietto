@@ -1,10 +1,10 @@
 /* jshint esnext:true */
 
 export
-var mainArea = function () {
+var mainDir = function () {
     return {
         restrict: "AE",
-        templateUrl: 'views/mainArea.html',
+        templateUrl: 'views/metaView.html',
         controller: 'mainCtrl'
     };
 };

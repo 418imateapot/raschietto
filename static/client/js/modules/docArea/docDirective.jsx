@@ -1,7 +1,7 @@
 /* jshint esnext:true */
 
 export
-var docArea = function () {
+var docDir = function () {
     return {
         restrict: "AE",
         templateUrl: 'views/docArea.html',

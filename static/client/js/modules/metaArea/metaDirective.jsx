@@ -1,10 +1,10 @@
 /* jshint esnext:true */
 
 export
-var metaArea = function () {
+var metaDir = function () {
     return {
         restrict: "AE",
-        templateUrl: 'views/metaArea.html',
+        templateUrl: 'views/metaView.html',
         controller: 'metaCtrl'
     };
 };
