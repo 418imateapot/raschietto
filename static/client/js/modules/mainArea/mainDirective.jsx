@@ -4,7 +4,7 @@ export
 var mainDir = function () {
     return {
         restrict: "AE",
-        templateUrl: 'views/metaView.html',
+        templateUrl: 'views/mainView.html',
         controller: 'mainCtrl'
     };
 };

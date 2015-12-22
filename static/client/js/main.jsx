@@ -25,4 +25,5 @@ var app = angular.module('teapot.main', [
 ]);
 /* Registra le ROUTE */
 app.config(routes);
-app.controller('bossCtrl', ['$scope', function($scope){$scope.test = "OK!";}]);
+app.controller('bossCtrl', ['$scope', 'documentService', function($scope, documentService){
+}]);
