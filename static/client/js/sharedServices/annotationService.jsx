@@ -24,7 +24,7 @@ function query_template(expr) {
                 raschietto:type ?type;
                 oa:annotatedBy ?provenance;
                 oa:hasBody ?body.
-            ?body rdf:subject <http://www.dlib.org/dlib/november14/jahja/11jahja_ver1>;
+            ?body rdf:subject <${expr}>;
                 rdf:predicate ?predicate;
                 rdf:object ?object.
             OPTIONAL{?object rdfs:label ?label.}

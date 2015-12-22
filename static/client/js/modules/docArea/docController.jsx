@@ -33,8 +33,8 @@ var docCtrl = ['$scope', '$http', '$rootScope',
             });
 
         /**
-         * Notifica il mainController che vuoi caricare un nuovo doc
-         * @param url: l'url del documento da caricare
+         * Notifica gli altri componenti che vuoi caricare un nuovo doc
+         * @param url: string l'url del documento da caricare
          */
         $scope.load = (url) => {
             $rootScope.$broadcast('change_document', {
