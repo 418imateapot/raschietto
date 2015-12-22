@@ -26,5 +26,10 @@ def prova():
     get_doc(url)
 
 
+@manager.command
+def setup():
+    import setup
+    setup.main()
+
 if __name__ == "__main__":
     manager.run()
