@@ -13,6 +13,11 @@ from appManager import commands
 manager = Manager(app)
 
 
+def printFuncOutput(func, *args, **kwargs):
+    for line in func(*args, **kwargs):
+        print line
+
+
 @manager.command
 def info():
     """
@@ -34,13 +39,16 @@ def setup(target="all"):
     """
     Install and configure stuff needed for the app to work
     """
+    fun = None
     if target == "js":
-        commands.setupNodeDeps()
+        print "no output available. But it's working, I swear"
+        fun = commands.setupNodeDeps
     elif target == "py":
-        commands.setupPyDeps()
+        fun = commands.setupPyDeps
     else:
         from appManager.setup import setup
-        setup()
+        fun = setup
+    printFuncOutput(fun)
 
 
 @manager.command
@@ -48,7 +56,7 @@ def build():
     """
     Compile the static files of the webapp
     """
-    commands.buildStaticFiles(False)
+    printFuncOutput(commands.buildStaticFiles, False)
 
 
 @manager.command
@@ -56,7 +64,7 @@ def watch():
     """
     Compile the static files and watch for changes
     """
-    commands.buildStaticFiles(True)
+    printFuncOutput(commands.buildStaticFiles, True)
 
 
 @manager.command
@@ -64,7 +72,7 @@ def apacheConf():
     """
     Generate a decent (but probably dangerous) apache configuration.
     """
-    commands.setupApacheStuff()
+    printFuncOutput(commands.setupApacheStuff)
 
 
 @manager.command
