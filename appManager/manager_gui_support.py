@@ -5,34 +5,28 @@
 #    Dec 22, 2015 05:35:40 PM
 
 
-import sys
 import threading
 
 try:
-    from Tkinter import *
+    from Tkinter import *  # noqa
 except ImportError:
-    from tkinter import *
+    from tkinter import *  # noqa
 
 try:
     import ttk
     py3 = 0
 except ImportError:
-    import tkinter.ttk as ttk
+    import tkinter.ttk as ttk  # noqa
     py3 = 1
-
-
-WATCHING = False
-watch_thread = None
 
 
 def doSetup():
 
     def run():
-        global w
-        from .setup import ugly_hack
-        for line in ugly_hack():
-            w.Scrolledtext1.insert(INSERT, line)
-            w.Scrolledtext1.see(END)
+        runPip().join()
+        runNpm().join()
+        runGulp().join()
+        genApacheConf().join()
 
     threading.Thread(target=run).start()
 
@@ -50,7 +44,9 @@ def runGulp():
         w.Scrolledtext1.insert(INSERT, "\nAll Done!\n=========\n")
         w.Scrolledtext1.see(END)
 
-    threading.Thread(target=run).start()
+    thread_obj = threading.Thread(target=run)
+    thread_obj.start()
+    return thread_obj
 
 
 def runNpm():
@@ -87,7 +83,9 @@ All Done!
 """)
         w.Scrolledtext1.see(END)
 
-    threading.Thread(target=run).start()
+    thread_obj = threading.Thread(target=run)
+    thread_obj.start()
+    return thread_obj
 
 
 def genApacheConf():
@@ -99,7 +97,9 @@ def genApacheConf():
             w.Scrolledtext1.insert(INSERT, line)
             w.Scrolledtext1.see(END)
 
-    threading.Thread(target=run).start()
+    thread_obj = threading.Thread(target=run)
+    thread_obj.start()
+    return thread_obj
 
 
 def runPip():
@@ -111,7 +111,9 @@ def runPip():
             w.Scrolledtext1.insert(INSERT, line)
             w.Scrolledtext1.see(END)
 
-    threading.Thread(target=run).start()
+    thread_obj = threading.Thread(target=run)
+    thread_obj.start()
+    return thread_obj
 
 
 def runWatch():
