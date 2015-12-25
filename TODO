@@ -17,6 +17,18 @@
 * Inserire nuove annotazioni (lato client)
 * Inserire nuove annotazioni (lato server)
 
-Che cosa serve per inserire una nuova annotazione?
+AUTH todo
+=========
 
--hasTitle
+il router è stato riconfigurato per tenere traccia degli url che richiedono login.
+L'idea sarebbe fare qualcosa del genere:
+
+http://solidfoundationwebdev.com/blog/posts/require-authentication-for-certain-routes-with-ui-router-in-angularjs
+
+Quindi occorre creare un nuovo servizio in ./static/client/js/sharedServices epoi ???
+
+altro link utile:
+
+https://medium.com/opinionated-angularjs/techniques-for-authentication-in-angularjs-applications-7bbf0346acec#.q75zq7n1s
+
+sembra molto ricco di roba da copiaincollare
