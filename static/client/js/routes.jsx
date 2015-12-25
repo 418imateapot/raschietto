@@ -15,12 +15,35 @@ var routes = ['$stateProvider', '$urlRouterProvider', '$locationProvider',
         $stateProvider
 
         /**
-         * /home è la pagina principale e forse sarà l'unica.
+         * /home è la pagina principale 
+         * potrebbe ospitare il tutorial?
          */
             .state('home', {
             url: '/home',
             templateUrl: 'views/homeView.html',
-            controller: 'bossCtrl'
+            controller: 'fakeController',
+            auth: false
+        })
+
+        /**
+         * Gli url figli di 'reader' non richiedono autenticazione
+         */
+        .state('reader', {
+            url: '/reader',
+            templateUrl: 'views/homeView.html',
+            controller: 'fakeController',
+            auth: false
+        })
+
+        /**
+         * Gli url figli di 'annotator' richiedono autenticazione
+         * e permettono di creare nuove annotazioni
+         */
+        .state('annotator', {
+            url: '/annotator',
+            templateUrl: 'views/homeView.html',
+            controller: 'fakeController',
+            auth: true
         });
 
     }
