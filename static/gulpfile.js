@@ -20,6 +20,7 @@ var sass = require('gulp-sass');
 var sequence = require('run-sequence');
 var rename = require('gulp-rename');
 var flatten = require('gulp-flatten');
+var tsd = require('gulp-tsd');
 
 // ==============
 // VARIABLES
@@ -117,6 +118,17 @@ gulp.task('js', function() {
         .on('error', gutil.log)			// Logga errori
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(js_dest));
+});
+
+/**
+ * Installa le type defintions utili per i plugin
+ * di autocompletmaento semantico
+ */
+gulp.task('tsd', function(callback) {
+    tsd({
+        command: 'reinstall',
+        config: './tsd.json'
+    }, callback);
 });
 
 /**
