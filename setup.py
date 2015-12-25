@@ -143,6 +143,19 @@ def setupApacheStuff():
     print "Done!"
 
 
+def makeIcon():
+    with open('Manager.desktop', 'w') as f:
+        desktop_file = """
+[Desktop Entry]
+Name=Raschietto Manager
+Type=Application
+Exec=python {}/manage.py gui
+Terminal=false
+""".format(REPO_DIR)
+        f.write(desktop_file)
+    os.chmod('Manager.desktop', 0o744)
+
+
 @spacer
 def lastMessage():
     print """
@@ -156,6 +169,8 @@ per installare il sito su macchina locale,
 oppure copiare a mano le cartelle e il file
 "apache_files/renameme.htaccess" sul server
 remoto per mettere su tutta la baracca
+
+NEW => prova il nuovo favoloso "raschietto manager"!
 """
 
 
@@ -167,6 +182,7 @@ def main():
     setupNodeDeps()
     buildStaticFiles()
     setupApacheStuff()
+    makeIcon()
     lastMessage()
 
 
