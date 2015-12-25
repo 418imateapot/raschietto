@@ -14,9 +14,13 @@ execfile(activate_this, dict(__file__=activate_this))
 
 
 from flask.ext.script import Manager
+
 from teapot import app
 from appManager import commands
+<<<<<<< HEAD
 
+=======
+>>>>>>> f9313d818d07872c62be49ed79fc96222517ce89
 
 manager = Manager(app)
 
