@@ -9,28 +9,21 @@ import {router} from 'angular-ui-router';
 
 // Componenti dell'applicazione
 import {routes} from './routes.jsx';
-import {mainCtrl, docCtrl, metaCtrl} from './controllers/areaControllers.jsx';
-import {documentService} from './services/documentService.jsx';
-import {annotationService} from './services/annotationService.jsx';
-import {mainArea} from './directives/mainArea.jsx';
-import {docArea} from './directives/docArea.jsx';
-import {metaArea} from './directives/metaArea.jsx';
+import {sharedServices} from './sharedServices/index.jsx';
+import {teapotAreas} from './modules/index.js';
 
 /**
  * Registra tutti i componenti dell'applicazione
  * col modulo angular principale
  */
-angular.module('teapot', ['mm.foundation', 'ui.router', 'ngAnimate'])
-	/* Registra le ROUTE */
-    .config(routes)
-	/* Registra i CONTROLLER */
-    .controller('docCtrl', docCtrl)
-    .controller('metaCtrl', metaCtrl)
-    .controller('mainCtrl', mainCtrl)
-        /* Registra le DIRECTIVES */
-    .directive('mainArea', mainArea)
-    .directive('docArea', docArea)
-    .directive('metaArea', metaArea)
-	/* Registra I SERVIZI */
-    .factory('documentService', documentService)
-    .factory('annotationService', annotationService);
+var app = angular.module('teapot.main', [
+    'mm.foundation',
+    'ui.router',
+    'ngAnimate',
+    'teapot.sharedServices',
+    'teapot.areas'
+]);
+/* Registra le ROUTE */
+app.config(routes);
+app.controller('bossCtrl', ['$scope', 'documentService', function($scope, documentService){
+}]);

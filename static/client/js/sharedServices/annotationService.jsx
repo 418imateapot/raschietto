@@ -6,9 +6,8 @@
  * Servizio che, dato un url, chiede al triplestore le annotazioni
  * sulla fabio:Expression corrispondente
  *
- * @param url: string indovine un po'
+ * @param {string} url -  indovine un po'
  */
-
 function query_template(expr) {
     // Usa i nuovi template string di ES6
     return `
@@ -24,7 +23,7 @@ function query_template(expr) {
                 raschietto:type ?type;
                 oa:annotatedBy ?provenance;
                 oa:hasBody ?body.
-            ?body rdf:subject <http://www.dlib.org/dlib/november14/jahja/11jahja_ver1>;
+            ?body rdf:subject <${expr}>;
                 rdf:predicate ?predicate;
                 rdf:object ?object.
             OPTIONAL{?object rdfs:label ?label.}
@@ -68,8 +67,13 @@ var annotationService = ['$http',
         }
 
         var service = {
-            // Restituisce la promessa del risultato di una query gigante
-            // sul documento passato come arg.
+            /** 
+             * @function get
+             * Restituisce la promessa del risultato di una query gigante
+             * sul documento passato come arg.
+             * @param String url L'url del documento interessato
+             * @returns {Promise} La risposta alla query dallo SPARQL endpoint
+             */
             get: function(url) {
                 // Converti brutalmente da fabio:Item a fabio:Expression
                 var expression = url.replace(/\.html$/, "_ver1");
@@ -93,8 +97,15 @@ var annotationService = ['$http',
                 return promise;
             },
 
-            // Convalida i risultati e li riorganizza
-            // in un formato più appetibile
+            /**
+             * @function tidy
+             * Convalida i risultati e li riorganizza
+             * in un formato più appetibile
+             * @param {Object} data Il risultato in JSON restituito da SPARQL
+             * endpoint
+             * @returns {Object} Una versione più amichevole dei risultati,
+             * purgata delle annotazioni non valide
+             */
             tidy: function(data) {
                 var items = data.results.bindings;
                 var result = {
