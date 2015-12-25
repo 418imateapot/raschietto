@@ -7,3 +7,4 @@ static/typings
 apache_files/010-raschietto.conf
 *.pyc
 *.swp
+*.desktop

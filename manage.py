@@ -5,10 +5,18 @@ Funzioni utili per la gestione del server
 da riga di comando
 """
 
-from flask.ext.script import Manager
 
+# Attiva l'ambiente virtuale python
+from os import path
+binpath = path.dirname(path.realpath(__file__))
+activate_this = path.join(binpath, 'env/bin/activate_this.py')
+execfile(activate_this, dict(__file__=activate_this))
+
+
+from flask.ext.script import Manager
 from teapot import app
 from appManager import commands
+
 
 manager = Manager(app)
 
