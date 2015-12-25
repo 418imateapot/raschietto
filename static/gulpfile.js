@@ -138,7 +138,7 @@ gulp.task('tsd', function(callback) {
 gulp.task('watch', function() {
 	gulp.watch(['client/js/**/*.jsx'], ['js']);
 	gulp.watch(['client/scss/*.scss'], ['sass']);
-	gulp.watch(['client/views/*.html', 'client/index.html'], ['copy']);
+	gulp.watch(['client/js/**/*.html', 'client/index.html'], ['copy']);
 });
 
 /**
