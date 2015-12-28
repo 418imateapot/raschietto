@@ -57,11 +57,14 @@ def get_doc(url_string):
     my_page = html.fromstring(body)
 
     title = my_page.xpath('//h3[@class="blue-space"][2]')
-    full_content = my_page.xpath('//table[3]//table[5]//table[1]//td[2]')
-    full_content = fix_links(full_content[0], url_string)
+    full_content = my_page.xpath('//table[3]//table[5]//table[1]//td[2]/*')
+
+    full_content = ''.join(
+        [etree.tostring(fix_links(el, url_string)) for el in full_content])
+
     result = {
         'title': title[0].text_content(),
-        'content': etree.tostring(full_content)
+        'content': full_content
         }
 
     return json.JSONEncoder().encode(result)
