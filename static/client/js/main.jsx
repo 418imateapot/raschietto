@@ -10,7 +10,7 @@ import {router} from 'angular-ui-router';
 // Componenti dell'applicazione
 import {routes} from './routes.jsx';
 import {sharedServices} from './sharedServices/index.jsx';
-import {teapotAreas} from './modules/index.js';
+import {teapotAreas, teapotUi} from './modules/index.js';
 
 /**
  * Registra tutti i componenti dell'applicazione
@@ -21,6 +21,7 @@ var app = angular.module('teapot.main', [
     'ui.router',
     'ngAnimate',
     'teapot.sharedServices',
+    'teapot.ui',
     'teapot.areas'
 ]);
 /* Registra le ROUTE */

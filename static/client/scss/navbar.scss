@@ -1,0 +1,39 @@
+@import './_settings.scss';
+
+top-bar {
+    overflow-x: scroll;
+}
+
+.raschi-left-nav {
+    width: 300%;
+    @media (max-width: 1050px) {
+        width: 200%;
+    }
+    @media (max-width: 900px) {
+        width: 100%;
+    }
+    @media (max-width: 750px) {
+        width: 80%;
+    }
+}
+
+ul.f-dropdown li {
+    //background-color: lightGray;
+    width: 300%;
+    @media (max-width: 1050px) {
+        width: 200%;
+    }
+    @media (max-width: 900px) {
+        width: 100%;
+    }
+    @media (max-width: 750px) {
+        width: 80%;
+    }
+}
+ul.f-dropdown {
+    @media #{$small-only} {
+        overflow: scroll;
+        position: absolute;
+        z-index: 999;
+    }
+}

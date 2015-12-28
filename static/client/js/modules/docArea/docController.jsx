@@ -6,6 +6,9 @@
 export
 var docCtrl = ['$scope', '$http', '$rootScope',
     function($scope, $http, $rootScope) {
+
+        $scope.loadingDocs = true;
+
         var query = `
             PREFIX fabio: <http://purl.org/spar/fabio/>
             PREFIX dcterms: <http://purl.org/dc/terms/>
@@ -27,6 +30,7 @@ var docCtrl = ['$scope', '$http', '$rootScope',
         $http.jsonp(query_url)
             .then(response => {
                 $scope.urls = response.data.results.bindings;
+                $scope.loadingDocs = true;
             })
             .catch(err => {
                 console.log(err);

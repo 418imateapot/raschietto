@@ -1,3 +1,7 @@
-<ul ng-repeat="obj in urls">
-    <li ng-click="load(obj.url.value)">{{obj.title.value}}</li>
-</ul>
+    <input type="search" ng-model="searchText" placeholder="Seleziona Documento" 
+    typeahead="obj as obj.title.value for obj in urls | filter: {title: {value: searchText}}"
+    typeahead-on-select="load(searchText.url.value)"
+    class="form-control" id="docAreaInput">
+<!-- Loading icon??
+    <i ng-show="loadingDocs" class="fa fa-refresh"></i>
+-->
