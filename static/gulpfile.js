@@ -27,7 +27,7 @@ var tsd = require('gulp-tsd');
 // ==============
 var js_src = './client/js/main.jsx';
 var scss_src = './client/scss/main.scss';
-var views_src = './client/**/*View.html';
+var views_src = './client/js/**/*.html';
 var index_src = './client/index.html';
 var js_dest = './build/js/';
 var scss_dest = './build/css/';

@@ -1,0 +1,57 @@
+<div class="sticky">
+    <top-bar>
+        <ul class="title-area">
+            <li class="name">
+                <h1><a href="#">Raschietto</a></h1>
+            </li>
+            <li toggle-top-bar class="menu-icon"><a href="#">Menu</a>
+            </li>
+        </ul>
+
+        <top-bar-section>
+            <!-- Right Nav Section -->
+            <ul class="right">
+                <li class="active" has-dropdown>
+                    <a href="#"><i class="fa fa-book"></i> Modalità Reader</a>
+                    <ul top-bar-dropdown>
+                        <li><a href="#"><i class="fa fa-pencil"></i> Passa ad Annotator</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-graduation-cap"></i> Rivedi tutorial</a>
+                        </li>
+                    </ul>
+
+                </li>
+                <li><a href="#"><i class="fa fa-sign-in"></i> Login</a>
+                </li>
+            </ul>
+
+            <!-- Left Nav Section -->
+            <ul class="left">
+                <li has-dropdown>
+                    <a href="#" class="raschi-left-nav"><i class="fa fa-bars"></i> Menu</a>
+                    <ul top-bar-dropdown>
+                        <li>
+                            <a href="#"><i class="fa fa-file-text-o"></i> Documenti</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-pencil"></i> Elenco annotazioni</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-filter"></i> Filtri</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="has-form">
+                    <div class="row collapse raschi-left-nav" id="topDocSearch">
+                        <div class="large-8 small-9 columns">
+                            <doc-area></doc-area>
+                        </div>
+                        <div class="large-4 small-3 columns">
+                            <a class="button warning">
+                                <i class="fa fa-arrow-down"></i>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </top-bar-section>
+    </top-bar>
+</div>

@@ -10,6 +10,7 @@ var mainCtrl = ['$scope', '$http', '$sce', 'documentService',
         documentService.get('http://www.dlib.org/dlib/november14/beel/11beel.html')
             .then((doc) => {
                 $scope.content = $sce.trustAsHtml(doc.resp.content);
+                console.log(doc.resp.content);
                 $scope.loading = false;
             });
         /**
