@@ -11,12 +11,12 @@
         <top-bar-section>
             <!-- Right Nav Section -->
             <ul class="right">
-                <li class="active" has-dropdown>
-                    <a href="#"><i class="fa fa-book"></i> Modalità Reader</a>
+                <li class="{{color}}" has-dropdown>
+                    <a href="#" ng-bind-html="activeMode"></a>
                     <ul top-bar-dropdown>
-                        <li><a href="#"><i class="fa fa-pencil"></i> Passa ad Annotator</a>
+                        <li><a href="#" ng-bind-html="mode2"></a>
                         </li>
-                        <li><a href="#"><i class="fa fa-graduation-cap"></i> Rivedi tutorial</a>
+                        <li><a href="#" ng-bind-html="mode3"></a>
                         </li>
                     </ul>
 
@@ -31,7 +31,7 @@
                     <a href="#" class="raschi-left-nav"><i class="fa fa-bars"></i> Menu</a>
                     <ul top-bar-dropdown>
                         <li>
-                            <a href="#"><i class="fa fa-file-text-o"></i> Documenti</a>
+                            <a href="#"><i class="fa fa-file-text-o"></i> Elenco Documenti</a>
                         </li>
                         <li><a href="#"><i class="fa fa-pencil"></i> Elenco annotazioni</a>
                         </li>

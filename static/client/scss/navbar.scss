@@ -11,7 +11,7 @@ top-bar {
     }
     @media (max-width: 900px) {
         width: 100%;
-    }
+}
     @media (max-width: 750px) {
         width: 80%;
     }
@@ -35,5 +35,58 @@ ul.f-dropdown {
         overflow: scroll;
         position: absolute;
         z-index: 999;
+    }
+}
+
+// Diversi colori per l'indicatore di modalità
+ul li {
+    $tutorial-green: $success-color;
+    $annotator-red: $alert-color;
+    $reader-blue: $primary-color;
+
+
+    &.annotator-red > a {
+        background: $annotator-red;
+        &:hover {
+            background: $annotator-red;
+        }
+    }
+    &.annotator-red:not(.has-form) {
+        a:not(.button) {
+            background: $annotator-red;
+            &:hover {
+                background: $annotator-red;
+            }
+        }
+    }
+
+    &.tutorial-green > a {
+        background: $tutorial-green;
+        &:hover {
+            background: $tutorial-green;
+        }
+    }
+    &.tutorial-green:not(.has-form) {
+        a:not(.button) {
+            background: $tutorial-green;
+            &:hover {
+                background: $tutorial-green;
+            }
+        }
+    }
+
+    &.reader-blue > a {
+        background: $reader-blue;
+        &:hover {
+            background: $reader-blue;
+        }
+    }
+    &.reader-blue:not(.has-form) {
+        a:not(.button) {
+            background: $reader-blue;
+            &:hover {
+                background: $reader-blue;
+            }
+        }
     }
 }
