@@ -5,7 +5,10 @@ var routes = ['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
         /* html5Mode permette di avere url puliti (senza abuso di #)
          * sui browser che lo supportano */
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: true
+        });
         /* Default route, se nessun altro fa match */
         $urlRouterProvider.otherwise('/home');
 
@@ -15,7 +18,7 @@ var routes = ['$stateProvider', '$urlRouterProvider', '$locationProvider',
         $stateProvider
 
         /**
-         * /home è la pagina principale 
+         * /home è la pagina principale
          * potrebbe ospitare il tutorial?
          */
             .state('home', {

@@ -1,0 +1,92 @@
+@import './_settings.scss';
+
+top-bar {
+    overflow-x: scroll;
+}
+
+.raschi-left-nav {
+    width: 300%;
+    @media (max-width: 1050px) {
+        width: 200%;
+    }
+    @media (max-width: 900px) {
+        width: 100%;
+}
+    @media (max-width: 750px) {
+        width: 80%;
+    }
+}
+
+ul.f-dropdown li {
+    //background-color: lightGray;
+    width: 300%;
+    @media (max-width: 1050px) {
+        width: 200%;
+    }
+    @media (max-width: 900px) {
+        width: 100%;
+    }
+    @media (max-width: 750px) {
+        width: 80%;
+    }
+}
+ul.f-dropdown {
+    @media #{$small-only} {
+        overflow: scroll;
+        position: absolute;
+        z-index: 999;
+    }
+}
+
+// Diversi colori per l'indicatore di modalità
+ul li {
+    $tutorial-green: $success-color;
+    $annotator-red: $alert-color;
+    $reader-blue: $primary-color;
+
+
+    &.annotator-red > a {
+        background: $annotator-red;
+        &:hover {
+            background: $annotator-red;
+        }
+    }
+    &.annotator-red:not(.has-form) {
+        a:not(.button) {
+            background: $annotator-red;
+            &:hover {
+                background: $annotator-red;
+            }
+        }
+    }
+
+    &.tutorial-green > a {
+        background: $tutorial-green;
+        &:hover {
+            background: $tutorial-green;
+        }
+    }
+    &.tutorial-green:not(.has-form) {
+        a:not(.button) {
+            background: $tutorial-green;
+            &:hover {
+                background: $tutorial-green;
+            }
+        }
+    }
+
+    &.reader-blue > a {
+        background: $reader-blue;
+        &:hover {
+            background: $reader-blue;
+        }
+    }
+    &.reader-blue:not(.has-form) {
+        a:not(.button) {
+            background: $reader-blue;
+            &:hover {
+                background: $reader-blue;
+            }
+        }
+    }
+}

@@ -4,13 +4,28 @@
 import 'jquery';
 import 'angular';
 import 'angular-animate';
-import {foundation} from 'angular-foundation';
-import {router} from 'angular-ui-router';
+import {
+    foundation
+}
+from 'angular-foundation';
+import {
+    router
+}
+from 'angular-ui-router';
 
 // Componenti dell'applicazione
-import {routes} from './routes.jsx';
-import {sharedServices} from './sharedServices/index.jsx';
-import {teapotAreas} from './modules/index.js';
+import {
+    routes
+}
+from './routes.jsx';
+import {
+    sharedServices
+}
+from './sharedServices/index.jsx';
+import {
+    teapotAreas, teapotUi
+}
+from './modules/index.js';
 
 /**
  * Registra tutti i componenti dell'applicazione
@@ -21,9 +36,11 @@ var app = angular.module('teapot.main', [
     'ui.router',
     'ngAnimate',
     'teapot.sharedServices',
+    'teapot.ui',
     'teapot.areas'
 ]);
 /* Registra le ROUTE */
 app.config(routes);
-app.controller('fakeController', ['$scope', 'documentService', function($scope, documentService){
-}]);
+app.controller('fakeController', ['$scope', 'documentService',
+    function($scope, documentService) {}
+]);
