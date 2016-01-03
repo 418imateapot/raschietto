@@ -1,11 +1,10 @@
 /* jshint esnext: true */
 export
-var loginModalCtrl = function($scope /*, UsersApi*/){
-  this.cancel=$scope.$dismiss;
+var loginModalCtrl = function($scope, UserService) {
+    this.cancel = $scope.$dismiss;
 
-  this.submit = function (email, password){
-//    UsersApi.login(email,password).then(function(user){
-      $scope.$close(user);
-//    });
-  };
+    this.submit = function(email, password) {
+        var user = UserService.login(email, password);
+        $scope.$close(user);
+    };
 };
