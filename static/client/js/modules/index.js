@@ -1,9 +1,9 @@
 /* jshint esnext: true */
-import {metaArea} from './metaArea/metaArea.jsx';
-import {mainArea} from './mainArea/mainArea.jsx';
-import {docArea} from './docArea/docArea.jsx';
-import {raschiettoNavbar} from './raschiettoNavbar/raschiettoNavbar.jsx';
-import {login} from './loginModal/index.jsx';
+import {metaArea} from './metaArea/metaArea.js';
+import {mainArea} from './mainArea/mainArea.js';
+import {docArea} from './docArea/docArea.js';
+import {raschiettoNavbar} from './raschiettoNavbar/raschiettoNavbar.js';
+import {login} from './loginModal/index.js';
 
 export
 var teapotAreas = angular.module('teapot.areas', [

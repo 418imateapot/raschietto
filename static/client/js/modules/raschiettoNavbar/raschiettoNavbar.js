@@ -1,7 +1,7 @@
 /*jshint esnext:true */
 
-import {raschiettoNavCtrl} from './raschiettoNavController.jsx';
-import {raschiettoNavDirective} from './raschiettoNavDirective.jsx';
+import {raschiettoNavCtrl} from './raschiettoNavController.js';
+import {raschiettoNavDirective} from './raschiettoNavDirective.js';
 
 var raschiettoNavbar = angular.module('teapot.ui.raschiettoNavbar', []);
 raschiettoNavbar.directive('raschiettoNavbar', raschiettoNavDirective);
