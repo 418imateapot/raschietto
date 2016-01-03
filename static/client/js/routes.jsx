@@ -25,8 +25,10 @@ var routes = ['$stateProvider', '$urlRouterProvider', '$locationProvider',
             url: '/home',
             templateUrl: 'views/homeView.html',
             controller: 'fakeController',
-            auth: false
-        })
+            data:{
+              autenticazione:false
+            }
+          })
 
         /**
          * Gli url figli di 'reader' non richiedono autenticazione
@@ -35,7 +37,9 @@ var routes = ['$stateProvider', '$urlRouterProvider', '$locationProvider',
             url: '/reader',
             templateUrl: 'views/homeView.html',
             controller: 'fakeController',
-            auth: false
+            data:{
+              autenticazione:false
+            }
         })
 
         /**
@@ -46,7 +50,9 @@ var routes = ['$stateProvider', '$urlRouterProvider', '$locationProvider',
             url: '/annotator',
             templateUrl: 'views/homeView.html',
             controller: 'fakeController',
-            auth: true
+            data:{
+              autenticazione:true
+            }
         });
 
     }

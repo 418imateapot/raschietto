@@ -41,6 +41,28 @@ var app = angular.module('teapot.main', [
 ]);
 /* Registra le ROUTE */
 app.config(routes);
+
+app.run(function($rootScope, $state, loginModal){
+  $rootScope.$on('$stateChangeStart' , function(event,toState,toParam){
+
+    console.log(toState);
+
+  var autenticazione=toState.data.autenticazione;
+
+  if (autenticazione && typeof $rootScope.currentUser === 'undefined'){
+    event.preventDefault();
+
+    loginModal()
+    .then(function(){
+      return $state.go(tostate.name, toParams);
+    })
+    .catch(function(){
+      return $state.go('reader');
+    });
+  }
+
+  });
+});
 app.controller('fakeController', ['$scope', 'documentService',
     function($scope, documentService) {}
 ]);
