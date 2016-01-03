@@ -43,7 +43,7 @@ var app = angular.module('teapot.main', [
 app.config(routes);
 
 app.run(function($rootScope, $state, loginModal){
-  $rootScope.$on('$stateChangeStart' , function(event,toState,toParam){
+  $rootScope.$on('$stateChangeStart' , function(event,toState,toParams){
 
     console.log(toState);
 
@@ -54,7 +54,7 @@ app.run(function($rootScope, $state, loginModal){
 
     loginModal()
     .then(function(){
-      return $state.go(tostate.name, toParams);
+      return $state.go(toState.name, toParams);
     })
     .catch(function(){
       return $state.go('reader');
