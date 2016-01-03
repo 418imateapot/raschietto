@@ -17,11 +17,11 @@ from 'angular-ui-router';
 import {
     routes
 }
-from './routes.jsx';
+from './routes.js';
 import {
     sharedServices
 }
-from './sharedServices/index.jsx';
+from './sharedServices/index.js';
 import {
     teapotAreas, teapotUi
 }

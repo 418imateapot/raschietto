@@ -1,7 +1,7 @@
 /* jshint esnext: true */
-import {documentService} from './documentService.jsx';
-import {annotationService} from './annotationService.jsx';
-import {loginService} from './loginService.jsx';
+import {documentService} from './documentService.js';
+import {annotationService} from './annotationService.js';
+import {loginService} from './loginService.js';
 
 export
 var sharedServices = angular.module('teapot.sharedServices', [])
