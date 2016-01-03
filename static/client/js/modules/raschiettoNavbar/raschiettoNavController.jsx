@@ -3,38 +3,59 @@
  * Controller per la metaArea
  */
 export
-var raschiettoNavCtrl = ['$scope', '$state', '$sce',
-    function($scope, $state, $sce) {
+var raschiettoNavCtrl = ['$scope', '$state',
+    function($scope, $state) {
 
+        var modes = {
+            'reader': {
+                'color': 'reader-blue',
+                'icon': 'fa fa-book',
+                'name': 'Reader',
+                'state': 'reader'
+            },
+            'annotator': {
+                'color': 'annotator-red',
+                'icon': 'fa fa-pencil',
+                'name': 'Annotator',
+                'state': 'annotator'
+            },
+            'tutorial': {
+                'color': 'tutorial-green',
+                'icon': 'fa fa-graduation-cap',
+                'name': 'Tutorial',
+                'state': 'home'
+            }
+        };
 
-        var readerModeString = $sce.trustAsHtml('<i class="fa fa-book"></i> Modalità Reader');
-        var annotatorModeString = $sce.trustAsHtml('<i class="fa fa-pencil"></i> Modalità Annotator');
-        var tutorialModeString = $sce.trustAsHtml('<i class="fa fa-graduation-cap"></i> Tutorial</a>');
+        function setupMode(mode1, mode2, mode3) {
+            $scope.modeColor = modes[mode1].color;
+            $scope.icon1 = modes[mode1].icon;
+            $scope.modeName1 = modes[mode1].name;
+            $scope.icon2 = modes[mode2].icon;
+            $scope.modeName2 = modes[mode2].name;
+            $scope.uiState2 = modes[mode2].state;
+            $scope.icon3 = modes[mode3].icon;
+            $scope.modeName3 = modes[mode3].name;
+            $scope.uiState3 = modes[mode3].state;
+        }
 
         $scope.currentState = $state;
         $scope.$watch('currentState.current.name', function(newState, oldState) {
             switch (newState) {
                 case 'annotator':
-                    $scope.activeMode = annotatorModeString;
-                    $scope.mode2 = readerModeString;
-                    $scope.mode3 = tutorialModeString;
-                    $scope.color = 'annotator-red';
+                    setupMode('annotator', 'reader', 'tutorial');
                     break;
                 case 'home':
-                    $scope.activeMode = tutorialModeString;
-                    $scope.mode2 = readerModeString;
-                    $scope.mode3 = annotatorModeString;
-                    $scope.color = 'tutorial-green';
+                    setupMode('tutorial', 'reader', 'annotator');
                     break;
                 case 'reader':
-                default:
-                    $scope.activeMode = readerModeString;
-                    $scope.mode2 = annotatorModeString;
-                    $scope.mode3 = tutorialModeString;
-                    $scope.color = 'reader-blue';
-                   break;
+                    setupMode('reader', 'annotator', 'tutorial');
+                    break;
             }
         });
 
+        $scope.changeMode = function(newMode) {
+            $state.go(newMode);
+        };
     }
 ];

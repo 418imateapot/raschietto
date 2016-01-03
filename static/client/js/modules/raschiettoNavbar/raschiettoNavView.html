@@ -11,16 +11,22 @@
         <top-bar-section>
             <!-- Right Nav Section -->
             <ul class="right">
-                <li class="{{color}}" has-dropdown>
-                    <a href="#" ng-bind-html="activeMode"></a>
+                <li class=" dropdown-active {{modeColor}}" has-dropdown>
+                    <a><i class="{{icon1}}"></i> {{modeName1}}</a>
                     <ul top-bar-dropdown>
-                        <li><a href="#" ng-bind-html="mode2"></a>
+                        <li>
+                            <a ng-click="changeMode(uiState2)">
+                                <i class="{{icon2}}"></i> {{modeName2}}
+                            </a>
                         </li>
-                        <li><a href="#" ng-bind-html="mode3"></a>
+                        <li>
+                            <a ng-click="changeMode(uiState3)">
+                                <i class="{{icon3}}"></i> {{modeName3}}
+                            </a>
                         </li>
                     </ul>
-
                 </li>
+
                 <li><a href="#"><i class="fa fa-sign-in"></i> Login</a>
                 </li>
             </ul>
