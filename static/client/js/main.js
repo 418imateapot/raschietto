@@ -45,8 +45,6 @@ app.config(routes);
 app.run(function($rootScope, $state, loginModal){
   $rootScope.$on('$stateChangeStart' , function(event,toState,toParams){
 
-    console.log(toState);
-
   var autenticazione=toState.data.autenticazione;
 
   if (autenticazione && typeof $rootScope.currentUser === 'undefined'){

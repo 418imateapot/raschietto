@@ -1,7 +1,9 @@
 /* jshint esnext: true */
 export
 var loginModalCtrl = function($scope, UserService) {
-    this.cancel = $scope.$dismiss;
+    this.cancel = function() {
+        $scope.$dismiss("cancelled");
+    };
 
     this.submit = function(email, password) {
         var user = UserService.login(email, password);

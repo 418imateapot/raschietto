@@ -3,8 +3,8 @@
  * Controller per la metaArea
  */
 export
-var raschiettoNavCtrl = ['$scope', '$state',
-    function($scope, $state) {
+var raschiettoNavCtrl = ['$rootScope', '$scope', '$state',
+    function($rootScope, $scope, $state) {
 
         var modes = {
             'reader': {
@@ -52,6 +52,12 @@ var raschiettoNavCtrl = ['$scope', '$state',
                     setupMode('reader', 'annotator', 'tutorial');
                     break;
             }
+        });
+
+        // Controlla se dobbiamo mostrare "login" o "logout"
+        $scope.rs = $rootScope;
+        $scope.$watch('rs.currentUser', function(newVal) {
+            $scope.login =  (newVal) ? 'Logout' :  'Login';
         });
 
         $scope.changeMode = function(newMode) {
