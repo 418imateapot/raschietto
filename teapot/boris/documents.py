@@ -47,7 +47,7 @@ def removeFileName(url_string):
     return '/'.join(components)
 
 
-def get_doc(url_string):
+def dlib_get(url_string):
     url = urlparse.urlparse(url_string)
     conn = httplib.HTTPConnection(url.hostname)
     conn.request("GET", url.path)
@@ -58,13 +58,22 @@ def get_doc(url_string):
 
     title = my_page.xpath('//h3[@class="blue-space"][2]')
     full_content = my_page.xpath('//table[3]//table[5]//table[1]//td[2]/*')
+    doi = my_page.xpath('/html/head/meta[@name="DOI"]/@content')
 
     full_content = ''.join(
         [etree.tostring(fix_links(el, url_string)) for el in full_content])
 
     result = {
         'title': title[0].text_content(),
-        'content': full_content
+        'content': full_content,
+        'doi': doi[0]
         }
 
     return json.JSONEncoder().encode(result)
+
+
+def get_doc(url_string):
+    if "dlib.org" in url_string:
+        return dlib_get(url_string)
+    else:
+        return "<h1>NOPE</h1>"

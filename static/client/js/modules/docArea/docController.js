@@ -12,11 +12,13 @@ var docCtrl = ['$scope', '$http', '$rootScope',
         var query = `
             PREFIX fabio: <http://purl.org/spar/fabio/>
             PREFIX dcterms: <http://purl.org/dc/terms/>
-            SELECT ?url ?title {
+            PREFIX prism: <http://prismstandard.org/namespaces/basic/2.0/>
+            SELECT ?url ?title ?doi {
                 GRAPH <http://vitali.web.cs.unibo.it/raschietto/graph/ltw1543> {
                     ?x a fabio:Expression;
                         dcterms:title ?title;
-                        fabio:hasRepresentation ?url.
+                        fabio:hasRepresentation ?url;
+                        prism:hasDOI ?doi.
                 }
             }`; // Backtick, non virgoletta semplice
         var encodedQuery = encodeURIComponent(query);
@@ -40,10 +42,10 @@ var docCtrl = ['$scope', '$http', '$rootScope',
          * Notifica gli altri componenti che vuoi caricare un nuovo doc
          * @param url: string l'url del documento da caricare
          */
-        $scope.load = (url) => {
+        $scope.load = (url, doi) => {
             $rootScope.$broadcast('change_document', {
                 'doc_url': url,
-                'doc_expr': "something" // TODO: WTF??
+                'doc_doi': doi
             });
         };
     }

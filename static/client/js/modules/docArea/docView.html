@@ -1,6 +1,6 @@
     <input type="search" ng-model="searchText" placeholder="Seleziona Documento" 
     typeahead="obj as obj.title.value for obj in urls | filter: {title: {value: searchText}}"
-    typeahead-on-select="load(searchText.url.value)"
+    typeahead-on-select="load(searchText.url.value, searchText.doi.value)"
     class="form-control" id="docAreaInput">
 <!-- Loading icon??
     <i ng-show="loadingDocs" class="fa fa-refresh"></i>
