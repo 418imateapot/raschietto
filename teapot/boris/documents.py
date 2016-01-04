@@ -10,13 +10,13 @@ import json
 
 
 def fix_links(content, absolute_prefix):
-    """
-    Rewrite relative links to be absolute links based on certain URL.
-    Courtesy of
-    https://stackoverflow.com/questions/26167690/
-    lxml-how-to-change-img-src-to-absolute-link
+    """Riscrive i link relativi come link assoluti
 
-    @param content: HTML object
+    Vedi `questa domanda <https://stackoverflow.com/questions/26167690/lxml-how-to-change-img-src-to-absolute-link>`_ su StackOverflow
+
+    :param string content: Una stringa contenente un documento HTML
+    :param string absolute_prefix: L'URL base da cui costruire i link assoluti
+    :returns: Il documento HTML con i link riscritti
     """
     def join(base, url):
         """
@@ -40,14 +40,8 @@ def fix_links(content, absolute_prefix):
     return content
 
 
-def removeFileName(url_string):
-    """ Rimuove l'ultimo segmento da un URL """
-    components = url_string.split('/')
-    components.pop(-1)
-    return '/'.join(components)
-
-
-def dlib_get(url_string):
+def _dlib_get(url_string):
+    """Implementa la logica per estrarre documento e metadati da dlib.org"""
     url = urlparse.urlparse(url_string)
     conn = httplib.HTTPConnection(url.hostname)
     conn.request("GET", url.path)
@@ -73,7 +67,12 @@ def dlib_get(url_string):
 
 
 def get_doc(url_string):
+    """Recupera l'HTML di un documento
+
+    :param string url_string: L'URL del documento da scaricare
+    :returns: Dizionario contenente il documento richiesto e alcuni metadati
+    """
     if "dlib.org" in url_string:
-        return dlib_get(url_string)
+        return _dlib_get(url_string)
     else:
         return "<h1>NOPE</h1>"

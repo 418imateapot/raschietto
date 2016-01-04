@@ -12,4 +12,4 @@ anno1 = BNode()
 
 g.add((anno1, RDF.type, OA.annotation))
 
-print g.serialize(format="turtle")
+# print g.serialize(format="turtle")

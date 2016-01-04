@@ -56,4 +56,4 @@ main_annotation_template = """
                     <{WORK}>
           ]
 ]
-""".format(TITLE="qualcosa")
+"""#.format(TITLE="qualcosa")

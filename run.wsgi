@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-'''
+"""
 Entry point dell'applicazione python wsgi
 Prepara l'ambiente prima di importare
 l'applicazione flask
-'''
+"""
 
 import os
 import sys

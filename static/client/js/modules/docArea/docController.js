@@ -17,8 +17,8 @@ var docCtrl = ['$scope', '$http', '$rootScope',
                 GRAPH <http://vitali.web.cs.unibo.it/raschietto/graph/ltw1543> {
                     ?x a fabio:Expression;
                         dcterms:title ?title;
-                        fabio:hasRepresentation ?url;
-                        prism:hasDOI ?doi.
+                        fabio:hasRepresentation ?url.
+                    OPTIONAL{?x prism:hasDOI ?doi.}
                 }
             }`; // Backtick, non virgoletta semplice
         var encodedQuery = encodeURIComponent(query);

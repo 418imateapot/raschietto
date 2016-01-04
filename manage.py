@@ -28,18 +28,11 @@ def printFuncOutput(func, *args, **kwargs):
 
 @manager.command
 def info():
-    """
-    Print a list of environment variables for the flask app
+    """Stampa una lista di variabili d'ambiente relative a Flask
+    nella forma *chiave==valore*
     """
     for c in app.config:
         print "{}=={}".format(c, app.config[c])
-
-
-@manager.command
-def prova():
-    from teapot.boris.documents import get_doc
-    url = 'http://www.dlib.org/dlib/november14/beel/11beel.html'
-    get_doc(url)
 
 
 @manager.command
@@ -90,7 +83,6 @@ def gui():
     """
     from appManager.manager_gui import vp_start_gui
     vp_start_gui()
-
 
 if __name__ == "__main__":
     manager.run()
