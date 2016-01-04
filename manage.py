@@ -21,7 +21,7 @@ from appManager import commands
 manager = Manager(app)
 
 
-def printFuncOutput(func, *args, **kwargs):
+def _printFuncOutput(func, *args, **kwargs):
     for line in func(*args, **kwargs):
         print line
 
@@ -38,7 +38,7 @@ def info():
 @manager.command
 def setup(target="all"):
     """
-    Install and configure stuff needed for the app to work
+    Installa tutte le dependencies di Raschietto e compilaa i file statici
     """
     fun = None
     if target == "js":
@@ -49,37 +49,41 @@ def setup(target="all"):
     else:
         from appManager.setup import setup
         fun = setup
-    printFuncOutput(fun)
+    _printFuncOutput(fun)
 
 
 @manager.command
 def build():
     """
-    Compile the static files of the webapp
+    Compila tutti i file statici di Raschietto
     """
-    printFuncOutput(commands.buildStaticFiles, False)
+    _printFuncOutput(commands.buildStaticFiles, False)
 
 
 @manager.command
 def watch():
     """
-    Compile the static files and watch for changes
+    Compila tutti i file statici di Raschietto e rimane
+    in attesa di ulteriori modifiche da ricompilare
     """
-    printFuncOutput(commands.buildStaticFiles, True)
+    _printFuncOutput(commands.buildStaticFiles, True)
 
 
 @manager.command
 def apacheConf():
     """
-    Generate a decent (but probably dangerous) apache configuration.
+    Genera la configurazione di Apache necessaria
+    per installare Raschietto.
+
+    .. warning:: Probabilmente è un'idea migliore eseguire l'installazione a manoni...
     """
-    printFuncOutput(commands.setupApacheStuff)
+    _printFuncOutput(commands.setupApacheStuff)
 
 
 @manager.command
 def gui():
     """
-    Start the GUI version of raschietto manager
+    Avvia la *'splendida'* GUI di RaschiettoManager
     """
     from appManager.manager_gui import vp_start_gui
     vp_start_gui()

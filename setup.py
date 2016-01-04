@@ -4,6 +4,7 @@
 import os
 import sys
 from os import path, fork, execv, waitpid
+from functools import wraps
 
 REPO_DIR = path.dirname(path.realpath(__file__))
 CURRENT_DIR = os.getcwd()
@@ -11,8 +12,9 @@ VIRTUALENV_NAME = 'env'
 REQ_FILE = path.join(path.dirname(path.realpath(__file__)), 'requirements.txt')
 
 
-def spacer(func):
-    """ Decorator to space the output of my functions """
+def _spacer(func):
+    """ Decorator per inserire spazio nell'output delle funzioni"""
+    @wraps(func)
     def inner(*args, **kwargs):
         for i in range(1, 4):
             print ""
@@ -21,7 +23,10 @@ def spacer(func):
 
 
 def which(program):
-    """ Finds the path of the executable for a given command """
+    """Trova il path assoluto per il file eseguibile di un comando
+
+    :param str program: Il nome con cui viene invocato il programma
+    """
     def is_exe(fpath):
         return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
 
@@ -38,16 +43,20 @@ def which(program):
     return None
 
 
-def checkDir():
-    """ Checks that we are in the correct directory """
+def _checkDir():
+    """Verifica che ci troviamo nella directory corretta"""
     if CURRENT_DIR != REPO_DIR:
         os.chdir(REPO_DIR)
         print "cd into {}".format(REPO_DIR)
 
 
-@spacer
-def makeVirtualenv(name=VIRTUALENV_NAME):
-    """ Creates a default virtualenv """
+@_spacer
+def makeVirtualenv(name='env'):
+    """ Crea il virtualenv python in cui installare
+    le dipendenze di Raschietto
+
+    :param str name: Opzionale. Il nome del nuovo ambiente virtuale
+    """
     print "=================================="
     print "Setting up the virtual environment"
     print "=================================="
@@ -63,9 +72,9 @@ def makeVirtualenv(name=VIRTUALENV_NAME):
             sys.exit(1)
 
 
-@spacer
+@_spacer
 def installPyLibs(requirements_file=REQ_FILE):
-    """ Installs all required libraries in the virtualenv """
+    """ Installa le dependencies necessarie nel virtualenv"""
     print "===================================="
     print "Installing required python libraries"
     print "===================================="
@@ -81,9 +90,9 @@ def installPyLibs(requirements_file=REQ_FILE):
             sys.exit(1)
 
 
-@spacer
+@_spacer
 def setupNodeDeps():
-    """ Runs npm install in the static directory """
+    """Esegue *npm install* per installare le librerie JavaScript"""
     pid = fork()
     if pid == 0:
         print "==========================="
@@ -100,9 +109,9 @@ def setupNodeDeps():
             sys.exit(1)
 
 
-@spacer
+@_spacer
 def buildStaticFiles():
-    """ Runs gulp to build the static files """
+    """Esegue *gulp build* per compilare i file statici"""
     pid = fork()
     if pid == 0:
         print "==================="
@@ -118,11 +127,11 @@ def buildStaticFiles():
             sys.exit(1)
 
 
-@spacer
+@_spacer
 def setupApacheStuff():
     """
-    Compiles the configuration file template for apache
-    and creates the logs directory
+    Compila i file di configurazione per Apache a partire
+    dai template e crea la directory per i *log*
     """
     os.chdir('apache_files/')
     print "========================================"
@@ -144,6 +153,9 @@ def setupApacheStuff():
 
 
 def makeIcon():
+    """
+    Crea il file *.desktop* per RaschiettoManager
+    """
     with open('Manager.desktop', 'w') as f:
         desktop_file = """
 [Desktop Entry]
@@ -156,8 +168,11 @@ Terminal=false
     os.chmod('Manager.desktop', 0o744)
 
 
-@spacer
+@_spacer
 def lastMessage():
+    """
+    Stampa un messaggio conclusivo
+    """
     print """
 Setup completato!
 =================
@@ -175,8 +190,14 @@ NEW => prova il nuovo favoloso "raschietto manager"!
 
 
 ##################################################
-def main():
-    checkDir()
+def setup():
+    """
+    Esegue tutti i task necessari per installare
+    localmente Rachietto
+
+    .. note:: This is the function you're looking for!
+    """
+    _checkDir()
     makeVirtualenv('env')
     installPyLibs(REQ_FILE)
     setupNodeDeps()
@@ -187,4 +208,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    setup()
