@@ -21,6 +21,7 @@ var sequence = require('run-sequence');
 var rename = require('gulp-rename');
 var flatten = require('gulp-flatten');
 var tsd = require('gulp-tsd');
+var documentation = require('gulp-documentation');
 
 // ==============
 // VARIABLES
@@ -106,16 +107,16 @@ gulp.task('js', function() {
     };
 
     return b
-        .transform('babelify', babelConf)	// Transpiler
-        .bundle() 				// Infagotta tutto
+        .transform('babelify', babelConf) // Transpiler
+        .bundle() // Infagotta tutto
         .pipe(source('app.js'))
         .pipe(buffer())
-        .pipe(sourcemaps.init({			// Genera sourcemaps
+        .pipe(sourcemaps.init({ // Genera sourcemaps
             loadMaps: true
         }))
         // Add transformation tasks to the pipeline here.
         //.pipe(uglify())			// Minifica (ci mette un sacco)
-        .on('error', gutil.log)			// Logga errori
+        .on('error', gutil.log) // Logga errori
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(js_dest));
 });
@@ -136,9 +137,9 @@ gulp.task('tsd', function(callback) {
  * ad ogni cambiamento
  */
 gulp.task('watch', function() {
-	gulp.watch(['client/js/**/*.js'], ['js']);
-	gulp.watch(['client/scss/*.scss'], ['sass']);
-	gulp.watch(['client/js/**/*.html', 'client/index.html'], ['copy']);
+    gulp.watch(['client/js/**/*.js'], ['js']);
+    gulp.watch(['client/scss/*.scss'], ['sass']);
+    gulp.watch(['client/js/**/*.html', 'client/index.html'], ['copy']);
 });
 
 /**
@@ -146,6 +147,15 @@ gulp.task('watch', function() {
  */
 gulp.task('build', function() {
     sequence('clean', ['sass', 'js', 'copy']);
+});
+
+/**
+ * doc task: Genera la documentazione
+ */
+gulp.task('doc', function() {
+    return gulp.src(js_src)
+        .pipe(documentation({format: 'html'}))
+        .pipe(gulp.dest('../doc/client'));
 });
 
 /**
