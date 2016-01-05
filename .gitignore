@@ -10,3 +10,4 @@ doc/client/
 *.pyc
 *.swp
 *.desktop
+*~

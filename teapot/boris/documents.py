@@ -4,6 +4,7 @@ Funzioni utili per recuperare i documenti dai server remoti
 """
 
 from lxml import html, etree
+from lxml.html.clean import Cleaner
 import httplib
 import urlparse
 import json
@@ -66,6 +67,43 @@ def _dlib_get(url_string):
     return json.JSONEncoder().encode(result)
 
 
+def _statistica_(url_string):
+    """Implementa la logica per estrarre documento e metadati da rivista-statistica"""
+    url = urlparse.urlparse(url_string)
+    conn = httplib.HTTPConnection(url.hostname)
+    conn.request("GET", url.path)
+    res = conn.getresponse()
+    body = res.read()
+
+    my_page = html.fromstring(body)
+
+    for el in my_page.xpath('//*[@id="cookiesAlert"]'):
+        el.getparent().remove(el)
+
+    cleaner = Cleaner()
+    cleaner.javascript = True
+    my_page = cleaner.clean_html(my_page)
+
+    title = my_page.xpath('//*[@id="articleTitle"]/h3')
+    full_content = my_page.xpath('//*[@id="content"]')
+    doi = my_page.xpath('//*[@id="pub-id::doi"]')
+
+   
+
+    full_content = ''.join(
+        [etree.tostring(fix_links(el, url_string)) for el in full_content])
+
+
+    result = {
+        'title': title[0].text_content(),
+        'content': full_content,
+        'doi': doi[0].text_content()
+        }
+
+    return json.JSONEncoder().encode(result)
+
+
+
 def get_doc(url_string):
     """Recupera l'HTML di un documento
 
@@ -74,5 +112,7 @@ def get_doc(url_string):
     """
     if "dlib.org" in url_string:
         return _dlib_get(url_string)
-    else:
+    elif "rivista-statistica" in url_string:
+        return _statistica_(url_string)
+    else:    
         return "<h1>NOPE</h1>"
