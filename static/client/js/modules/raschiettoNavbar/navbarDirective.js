@@ -4,7 +4,7 @@ export
 var raschiettoNavDirective = function () {
     return {
         restrict: "AE",
-        templateUrl: 'views/raschiettoNavView.html',
+        templateUrl: 'views/navbarView.html',
         scope: {},
         controller: 'raschiettoNavbarCtrl'
     };

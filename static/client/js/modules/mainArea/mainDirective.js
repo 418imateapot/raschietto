@@ -1,11 +1,18 @@
 /* jshint esnext:true */
-
-export
-var mainDir = function () {
+/**
+ * @namespace
+ * @name teapot.modules.mainArea.mainAreaDirective
+ * @description
+ * Mostra il contenuto del documento caricato
+ */
+function mainAreaDirective() {
     return {
         restrict: "AE",
         templateUrl: 'views/mainView.html',
         scope: {},
-        controller: 'mainCtrl'
+        controller: 'MainAreaController',
+        controllerAs: 'mainArea'
     };
-};
+}
+
+export {mainAreaDirective};

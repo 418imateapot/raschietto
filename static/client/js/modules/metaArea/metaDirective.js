@@ -1,11 +1,13 @@
 /* jshint esnext:true */
 
-export
-var metaDir = function () {
+export {metaDirective};
+
+function metaDirective () {
     return {
         restrict: "AE",
         templateUrl: 'views/metaView.html',
         scope: {},
-        controller: 'metaCtrl'
+        controller: 'MetaController',
+        controllerAs: 'metaArea'
     };
-};
+}

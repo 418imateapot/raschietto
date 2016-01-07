@@ -13,6 +13,7 @@ var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
+var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
 var uglifycss = require('gulp-uglifycss');
 var sourcemaps = require('gulp-sourcemaps');
@@ -22,13 +23,14 @@ var sequence = require('run-sequence');
 var rename = require('gulp-rename');
 var flatten = require('gulp-flatten');
 var tsd = require('gulp-tsd');
-var documentation = require('gulp-documentation');
+var docco = require('gulp-docco');
 var shell = require('gulp-shell');
 
 // ==============
 // VARIABLES
 // ==============
-var js_src = './client/js/main.js';
+var js_main = './client/js/main.js';
+var js_src = './client/**/*.js';
 var scss_src = './client/scss/main.scss';
 var views_src = './client/js/**/*.html';
 var index_src = './client/index.html';
@@ -36,6 +38,7 @@ var js_dest = './build/js/';
 var scss_dest = './build/css/';
 var views_dest = './build/views';
 var index_dest = './build';
+var doc_dest = '../doc/client';
 
 // ==============
 // TASKS
@@ -88,6 +91,14 @@ gulp.task('copy', function() {
 });
 
 /**
+ * JS linter
+ */
+gulp.task('js:lint', function() {
+  return gulp.src(js_src)
+    .pipe(jshint())
+    .pipe(jshint.reporter('jshint-stylish'));
+});
+/**
  * Ubertask javascript:
  * + Risolve le dipendenze e compila tutto in un unico
  * 		file bundle usando browserify.
@@ -123,7 +134,7 @@ gulp.task('js:libs', function() {
 gulp.task('js:app', function() {
     // set up the browserify instance on a task basis
     var b = browserify({
-        entries: js_src,
+        entries: js_main,
         debug: true,
         bundleExternal: false
     });
@@ -160,15 +171,17 @@ gulp.task('tsd', function(callback) {
         config: './tsd.json'
     }, callback);
 });
-gulp.task('js', ['js:app']);
-gulp.task('js:all', ['js:app', 'js:libs']);
+gulp.task('js', function() {
+    sequence('js:lint', 'js:app');
+});
+gulp.task('js:all', ['js', 'js:libs']);
 
 /**
  * Monitora i file ed esegui i task appropriati
  * ad ogni cambiamento
  */
 gulp.task('watch', function() {
-    gulp.watch(['client/js/**/*.js'], ['js']);
+    gulp.watch(['client/js/**/*.js'], ['js', 'doc']);
     gulp.watch(['client/scss/*.scss'], ['sass']);
     gulp.watch(['client/js/**/*.html', 'client/index.html'], ['copy']);
 });
@@ -182,25 +195,33 @@ gulp.task('build', function() {
 
 /**
  * doc task: Genera la documentazione
+ * con JSDoc
  */
-gulp.task('docs', shell.task([
-    'node_modules/jsdoc/jsdoc.js ' +
-    '-c ./node_modules/angular-jsdoc/common/conf.json ' + // config file
-    '-t ./node_modules/angular-jsdoc/angular-template ' + // template file
-    '-d ../doc/client ' + // output directory
-    '../README.md ' + // to include README.md as index contents
-    '-r ./client/js' // source code directory
-]));
 gulp.task('doc', shell.task([
-    './node_modules/.bin/jsdoc ' +
-    './client/**/* ' +
-    '-r -d ../doc/client ' +
-    '-c ../doc/jsdoc-conf.json'
+    './node_modules/.bin/jsdoc ./client/js' +
+    ' -r -d ' + doc_dest +
+    ' -c ../doc/jsdoc-conf.json' +
+    ' -P ./package.json -p'
+]));
+
+gulp.task('docco', function() {
+    gulp.src(js_src)
+        .pipe(docco())
+        .pipe(gulp.dest('../doc/annotated_source'));
+});
+
+gulp.task('ngdoc', shell.task([
+  'node_modules/jsdoc/jsdoc.js '+
+    '-c node_modules/angular-jsdoc/common/conf.json '+   // config file
+    '-t node_modules/angular-jsdoc/angular-template '+   // template file
+    '-d ../doc/client/ang '+                           // output directory
+    '../README.md ' +                            // to include README.md as index contents
+    '-r ./client/js'                   // source code directory
 ]));
 
 /**
  * default task: esegui tutti i task e infine watch
  */
 gulp.task('default', function() {
-    sequence('clean', ['sass', 'js:libs', 'js:app', 'copy'], 'watch');
+    sequence('clean', 'js:lint', ['sass', 'js:libs', 'js:app', 'copy'], 'watch');
 });
