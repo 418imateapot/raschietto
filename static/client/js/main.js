@@ -1,35 +1,14 @@
 /* jshint esnext:true */
+/** @module main */
 
-// Librerie di terze parti
-import 'jquery';
-import 'angular';
-import 'angular-animate';
-import {
-    foundation
-}
-from 'angular-foundation';
-import {
-    router
-}
-from 'angular-ui-router';
-
-// Componenti dell'applicazione
-import {
-    routes
-}
-from './routes.js';
-import {
-    sharedServices
-}
-from './sharedServices/index.js';
-import {
-    teapotAreas, teapotUi
-}
-from './modules/index.js';
+import {routes} from './routes.js';
+import {sharedServices} from './sharedServices/index.js';
+import {teapotAreas, teapotUi} from './modules/index.js';
 
 /**
- * Registra tutti i componenti dell'applicazione
- * col modulo angular principale
+ * @member
+ * @name teapot.main
+ * @description Registra tutti i componenti dell'applicazione col modulo angular principale
  */
 var app = angular.module('teapot.main', [
     'mm.foundation',
@@ -42,25 +21,37 @@ var app = angular.module('teapot.main', [
 /* Registra le ROUTE */
 app.config(routes);
 
-app.run(function($rootScope, $state, loginModal){
-  $rootScope.$on('$stateChangeStart' , function(event,toState,toParams){
+app.run(['$rootScope', '$state', 'loginModal',
+    function($rootScope, $state, loginModal) {
+        /**
+         * @callback checkAuth
+         * @param {Event} event L'evento che ha causato l'invocazione della funzione
+         * @param {object} toState Il nuovo stato
+         * @param {object} toParams I parametri passati al nuovo stato
+         * @description
+         * Ogni volta che l'applicazione cambia stato, verifica se sia
+         * necessaria l'autenticazione per accedere al nuovo stato.
+         */
+        $rootScope.$on('$stateChangeStart', function checkAuth(event, toState, toParams) {
 
-  var autenticazione=toState.data.autenticazione;
+            var autenticazione = toState.data.autenticazione;
 
-  if (autenticazione && typeof $rootScope.currentUser === 'undefined'){
-    event.preventDefault();
+            if (autenticazione && typeof $rootScope.currentUser === 'undefined') {
+                event.preventDefault();
 
-    loginModal()
-    .then(function(){
-      return $state.go(toState.name, toParams);
-    })
-    .catch(function(){
-      return $state.go('reader');
-    });
-  }
+                loginModal()
+                    .then(function() {
+                        return $state.go(toState.name, toParams);
+                    })
+                    .catch(function() {
+                        return $state.go('reader');
+                    });
+            }
 
-  });
-});
+        });
+    }
+]);
+
 app.controller('fakeController', ['$scope', 'documentService',
     function($scope, documentService) {}
 ]);

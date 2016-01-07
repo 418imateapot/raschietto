@@ -13,7 +13,9 @@ import json
 def fix_links(content, absolute_prefix):
     """Riscrive i link relativi come link assoluti
 
-    Vedi `questa domanda <https://stackoverflow.com/questions/26167690/lxml-how-to-change-img-src-to-absolute-link>`_ su StackOverflow
+    Vedi `questa domanda \
+    <https://stackoverflow.com/questions/26167690/\
+    lxml-how-to-change-img-src-to-absolute-link>`_ su StackOverflow
 
     :param string content: Una stringa contenente un documento HTML
     :param string absolute_prefix: L'URL base da cui costruire i link assoluti
@@ -68,7 +70,9 @@ def _dlib_get(url_string):
 
 
 def _statistica_(url_string):
-    """Implementa la logica per estrarre documento e metadati da rivista-statistica"""
+    """Implementa la logica per estrarre documento
+    e metadati da rivista-statistica
+    """
     url = urlparse.urlparse(url_string)
     conn = httplib.HTTPConnection(url.hostname)
     conn.request("GET", url.path)
@@ -88,11 +92,8 @@ def _statistica_(url_string):
     full_content = my_page.xpath('//*[@id="content"]')
     doi = my_page.xpath('//*[@id="pub-id::doi"]')
 
-   
-
     full_content = ''.join(
         [etree.tostring(fix_links(el, url_string)) for el in full_content])
-
 
     result = {
         'title': title[0].text_content(),
@@ -101,7 +102,6 @@ def _statistica_(url_string):
         }
 
     return json.JSONEncoder().encode(result)
-
 
 
 def get_doc(url_string):
@@ -114,5 +114,5 @@ def get_doc(url_string):
         return _dlib_get(url_string)
     elif "rivista-statistica" in url_string:
         return _statistica_(url_string)
-    else:    
+    else:
         return "<h1>NOPE</h1>"

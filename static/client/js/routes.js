@@ -1,7 +1,20 @@
 /* jshint esnext:true */
+/** @module main/routes */
+
+
 export
 var routes = ['$stateProvider', '$urlRouterProvider', '$locationProvider',
-    function($stateProvider, $urlRouterProvider, $locationProvider) {
+
+    /**
+     * @function
+     * @name teapot.main.routerConfig
+     * @param {Service} $stateProvider
+     * @param {Service} $urlRouterProvider
+     * @param {Service} $locationProvider
+     * @description
+     * Configura le routes all'interno dell'applicazione
+     */
+    function routerConfig($stateProvider, $urlRouterProvider, $locationProvider) {
 
         /* html5Mode permette di avere url puliti (senza abuso di #)
          * sui browser che lo supportano */
@@ -25,10 +38,10 @@ var routes = ['$stateProvider', '$urlRouterProvider', '$locationProvider',
             url: '/home',
             templateUrl: 'views/homeView.html',
             controller: 'fakeController',
-            data:{
-              autenticazione:false
+            data: {
+                autenticazione: false
             }
-          })
+        })
 
         /**
          * Gli url figli di 'reader' non richiedono autenticazione
@@ -37,8 +50,8 @@ var routes = ['$stateProvider', '$urlRouterProvider', '$locationProvider',
             url: '/reader',
             templateUrl: 'views/homeView.html',
             controller: 'fakeController',
-            data:{
-              autenticazione:false
+            data: {
+                autenticazione: false
             }
         })
 
@@ -50,8 +63,8 @@ var routes = ['$stateProvider', '$urlRouterProvider', '$locationProvider',
             url: '/annotator',
             templateUrl: 'views/homeView.html',
             controller: 'fakeController',
-            data:{
-              autenticazione:true
+            data: {
+                autenticazione: true
             }
         });
 

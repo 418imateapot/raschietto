@@ -1,0 +1,11 @@
+{
+    "source": {
+        "includePattern": ".+\\.js(doc)?$",
+        "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "plugins": ["../static/node_modules/jsdoc-babel"],
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": false
+    }
+}

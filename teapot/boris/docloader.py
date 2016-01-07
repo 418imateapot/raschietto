@@ -40,6 +40,7 @@ def upload_graph(serialized_graph):
 def _getURLandTitle(url):
     """
     Recupera i metadati di un documento dal web
+
     :param string: url L'url del docmento da analizzare
     :returns:  Un dizionario contenente url, titolo e doi del documento
     """
@@ -68,6 +69,7 @@ def _createTriples(page_data):
     """
     Costruisce il grafo RDF con le triple rappresentanti il documento
     e i metadati che ci interessano.
+
     :param dict: page_data
                  Un dizionario contenente titolo, doi e url di un documento
     :returns: Il grafo rdflib.Graph contenente le triple generate
@@ -103,6 +105,7 @@ def makeGraph(url):
     """
     Dato l'URL di un documento supportato, restituisce un rdflib.Graph con
     le informazioni necessarie per insere il documento nel triple store.
+
     :param url: L'URL del documento.
     :returns string: Il grafo serializzato in formato nTriples
     """
@@ -115,6 +118,7 @@ def add_document_to_fuseki(url):
     """
     Aggiunge a fuseki le informazioni necessarie per gestire il
     documento puntato dall'url passato come parametro
+
     :param string: url L'URL del documento da aggiungere
     """
     url_obj = urlparse(url)

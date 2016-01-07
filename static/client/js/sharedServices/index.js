@@ -1,10 +1,15 @@
 /* jshint esnext: true */
 import {documentService} from './documentService.js';
 import {annotationService} from './annotationService.js';
-import {loginService} from './loginService.js';
 
+/**
+ * @module teapot
+ * @name teapot.sharedServices
+ * @description 
+ * Questo modulo espone alcuni servizi condivisi utili al
+ * resto dell'applicazione
+ */
 export
 var sharedServices = angular.module('teapot.sharedServices', [])
 .factory('documentService', documentService)
-.factory('annotationService', annotationService)
-.factory('loginService', loginService);
+.factory('annotationService', annotationService);

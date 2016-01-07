@@ -1,13 +1,8 @@
 /* jshint esnext: true */
 
+/** @module sharedServices/annotationService*/
 // TODO: Cancella i rami else di debug
 
-/**
- * Servizio che, dato un url, chiede al triplestore le annotazioni
- * sulla fabio:Expression corrispondente
- *
- * @param {string} url -  indovine un po'
- */
 function query_template(expr) {
     // Usa i nuovi template string di ES6
     return `
@@ -40,8 +35,16 @@ function query_template(expr) {
     `; // Sono backtick, non virgolette semplici
 }
 
+
 export
 var annotationService = ['$http',
+/**
+ * @function 
+ * @name teapot.sharedServices.annotationService
+ * @description
+ * Servizio che, dato un url, chiede al triplestore le annotazioni
+ * sulla fabio:Expression corrispondente
+ */
     function annotationLoaderFactory($http) {
         var promise;
 

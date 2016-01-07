@@ -1,11 +1,17 @@
 /* jshint esnext:true */
 
 /**
- * Controller per la docArea.
+ * @module teapot
+ * @name teapot.areas.docArea.docCtrl
+ * @description Controller per la docArea.
+ *              Si occupa di interrogare fuseki per ottenere la lista
+ *              dei documenti visualizzabili, e di informare tramite
+ *              $rootScope.$broadcast gli altri componenti quando l'utente
+ *              desidera caricare un nuovo documento.
  */
 export
 var docCtrl = ['$scope', '$http', '$rootScope',
-    function($scope, $http, $rootScope) {
+    function docCtrl($scope, $http, $rootScope) {
 
         $scope.loadingDocs = true;
 
@@ -43,6 +49,10 @@ var docCtrl = ['$scope', '$http', '$rootScope',
          * @param url: string l'url del documento da caricare
          */
         $scope.load = (url, doi) => {
+            /**
+             * @ngdoc events
+             * @name change_document
+             */
             $rootScope.$broadcast('change_document', {
                 'doc_url': url,
                 'doc_doi': doi
