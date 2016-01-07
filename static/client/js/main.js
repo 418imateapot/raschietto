@@ -1,28 +1,38 @@
 /* jshint esnext:true */
-/** @module main */
 
-import {routes} from './routes.js';
+/** 
+ * Questo è l'entry point dell'applicazione, dove
+ * vengono registrate tutte le componenti necessarie
+ * al suo funzionamento.
+ *
+ * @module teapot
+ */
+
+// Componenti dell'applicazione
+import {router} from './routes.js';
 import {sharedServices} from './sharedServices/index.js';
-import {teapotAreas, teapotUi} from './modules/index.js';
+import {teapotModules} from './modules/index.js';
 
 /**
- * @member
- * @name teapot.main
+ * @name app
  * @description Registra tutti i componenti dell'applicazione col modulo angular principale
  */
-var app = angular.module('teapot.main', [
+var app = angular.module('teapot', [
     'mm.foundation',
     'ui.router',
     'ngAnimate',
     'teapot.sharedServices',
-    'teapot.ui',
-    'teapot.areas'
+    'teapot.modules'
 ]);
+
 /* Registra le ROUTE */
-app.config(routes);
+app.config(router);
 
 app.run(['$rootScope', '$state', 'loginModal',
     function($rootScope, $state, loginModal) {
+        $rootScope.$on('$stateChangeStart', checkAuth);
+
+
         /**
          * @callback checkAuth
          * @param {Event} event L'evento che ha causato l'invocazione della funzione
@@ -32,7 +42,7 @@ app.run(['$rootScope', '$state', 'loginModal',
          * Ogni volta che l'applicazione cambia stato, verifica se sia
          * necessaria l'autenticazione per accedere al nuovo stato.
          */
-        $rootScope.$on('$stateChangeStart', function checkAuth(event, toState, toParams) {
+        function checkAuth(event, toState, toParams) {
 
             var autenticazione = toState.data.autenticazione;
 
@@ -48,7 +58,7 @@ app.run(['$rootScope', '$state', 'loginModal',
                     });
             }
 
-        });
+        }
     }
 ]);
 

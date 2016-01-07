@@ -1,17 +1,24 @@
 /* jshint esnext:true */
 
+
+export {docAreaDirective};
+
 /**
  * @ngdoc directive
  * @scope {}
- * @name teapot.areas.docArea.directive:docArea
- * @description Mostra la lista di documenti
+ * @restrict AE
+ *
+ * @namespace
+ * @name teapot.modules.docArea.docAreaDirective
+ * @description
+ * Mostra la lista di documenti
  */
-export
-var docDir = function () {
+function docAreaDirective() {
     return {
         restrict: "AE",
         templateUrl: 'views/docView.html',
         scope: {},
-        controller: 'docCtrl'
+        controller: 'DocumentController',
+        controllerAs: 'docArea'
     };
-};
+}

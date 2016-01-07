@@ -1,20 +1,25 @@
 /*jshint esnext:true */
 
 /**
- * @module teapot/areas/docArea
- * @name docArea
+ * @module teapot/modules/docArea
+ *
  * @description
- * Questo componente mostra la lista dei documenti disponibili
+ * Questo modulo visualizza la lista dei documenti disponibili e permette di
+ * sceglierne uno da visualizzare.<br/>
  * Su Desktop appare come un barra di ricerca con autocompletamento
- * Su Mobile lo sa la Madonna
+ * Su Mobile lo sa la Madonna.
+ *
+ * ##### Componenti:
+ *   - Direttiva: {@link teapot.modules.docArea.docAreaDirective}
+ *   - Controller: {@link teapot.modules.docArea.DocumentController}
  */
 
-import {docCtrl} from './docController.js';
-import {docDir} from './docDirective.js';
+import {DocumentController} from './docController.js';
+import {docAreaDirective} from './docDirective.js';
 
-var docArea = angular.module('teapot.areas.docArea', []);
+var docArea = angular.module('teapot.modules.docArea', ['teapot.sharedServices']);
 
-docArea.directive('docArea', docDir);
-docArea.controller('docCtrl', docCtrl);
+docArea.directive('docArea', docAreaDirective);
+docArea.controller('DocumentController', DocumentController);
 
 export {docArea};

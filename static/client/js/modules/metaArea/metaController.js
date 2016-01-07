@@ -2,15 +2,20 @@
 /**
  * Controller per la metaArea
  */
-export
-var metaCtrl = ['$scope', 'annotationService',
-    function($scope, annotationService) {
-        $scope.$on('change_document', (event, args) => {
-            annotationService.get(args.doc_url)
-                .then(response => {
-                    $scope.annotations = annotationService.tidy(response.body);
-                }).catch(err => console.log(err));
-        });
-    }
-];
+export {MetaController};
+MetaController.$inject = ['$scope', 'annotationService'];
 
+function MetaController($scope, annotationService) {
+    var metaArea = this;
+
+    this.annotations = [];
+
+    $scope.$on('change_document', load_annotations);
+
+    function load_annotations(event, args) {
+        annotationService.get(args.doc_url)
+            .then(response => {
+                metaArea.annotations = annotationService.tidy(response.body);
+            }).catch(err => console.log(err));
+    }
+}

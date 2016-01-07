@@ -1,24 +1,22 @@
 /* jshint esnext: true */
-
+/**
+ * Questo modulo fa da contenitore per tutte le componenti
+ * dell'applicazione.
+ *
+ * @module teapot/modules
+ */
 import {metaArea} from './metaArea/metaArea.js';
 import {mainArea} from './mainArea/mainArea.js';
 import {docArea} from './docArea/docArea.js';
-import {raschiettoNavbar} from './raschiettoNavbar/raschiettoNavbar.js';
+import {raschiettoNavbar} from './raschiettoNavbar/navbar.js';
 import {login} from './loginModal/index.js';
 
-/**
- * @module teapot.areas
- * @description Esporta le tre aree
- */
-export
-var teapotAreas = angular.module('teapot.areas', [
-    'teapot.areas.metaArea',
-    'teapot.areas.docArea',
-    'teapot.areas.mainArea'
+var teapotModules = angular.module('teapot.modules', [
+    'teapot.modules.metaArea',
+    'teapot.modules.docArea',
+    'teapot.modules.mainArea',
+    'teapot.modules.navbar',
+    'teapot.modules.login'
 ]);
 
-export
-var teapotUi = angular.module('teapot.ui', [
-    'teapot.ui.raschiettoNavbar',
-    'teapot.ui.login'
-]);
+export {teapotModules};
