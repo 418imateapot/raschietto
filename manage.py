@@ -53,6 +53,19 @@ def setup(target="all"):
 
 
 @manager.command
+def addDocument(url):
+    """
+    Aggiungi un documento a fuseki
+
+    :param string: url L'URL del documento da aggiungere
+    """
+    if not url:
+        print "stocazzo"
+    from teapot.boris import docloader
+    print docloader.add_document_to_fuseki(url)
+
+
+@manager.command
 def build():
     """
     Compila tutti i file statici di Raschietto
