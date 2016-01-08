@@ -2,10 +2,10 @@
 /**
  * Controller per la metaArea
  */
-export {MetaController};
+
 MetaController.$inject = ['$scope', 'annotationService'];
 
-function MetaController($scope, annotationService) {
+export default function MetaController($scope, annotationService) {
     var metaArea = this;
 
     this.annotations = [];

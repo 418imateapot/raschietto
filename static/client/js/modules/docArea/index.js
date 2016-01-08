@@ -14,12 +14,10 @@
  *   - Controller: {@link teapot.modules.docArea.DocumentController}
  */
 
-import {DocumentController} from './docController.js';
-import {docAreaDirective} from './docDirective.js';
+import DocumentController from './docController.js';
+import  docAreaDirective from './docDirective.js';
 
-var docArea = angular.module('teapot.modules.docArea', ['teapot.sharedServices']);
+export default angular.module('teapot.modules.docArea', ['teapot.sharedServices'])
 
-docArea.directive('docArea', docAreaDirective);
-docArea.controller('DocumentController', DocumentController);
-
-export {docArea};
+.directive('docArea', docAreaDirective)
+.controller('DocumentController', DocumentController);

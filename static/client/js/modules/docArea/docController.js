@@ -1,5 +1,7 @@
 /* jshint esnext:true */
 
+DocumentController.$inject = ['$http', '$rootScope', 'documentService'];
+
 /**
  * @class
  * @name teapot.modules.docArea.DocumentController
@@ -14,7 +16,7 @@
  *              $rootScope.$broadcast gli altri componenti quando l'utente
  *              desidera caricare un nuovo documento.
  */
-function DocumentController($http, $rootScope, documentService) {
+export default function DocumentController($http, $rootScope, documentService) {
 
     var model = this;
 
@@ -28,7 +30,6 @@ function DocumentController($http, $rootScope, documentService) {
     documentService.list()
         .then(data => {
             model.docs = data;
-            console.log(data);
         })
         .catch(err => {
             console.log(err);
@@ -57,7 +58,3 @@ function DocumentController($http, $rootScope, documentService) {
         });
     }
 }
-
-DocumentController.$inject = ['$http', '$rootScope', 'documentService'];
-
-export {DocumentController};

@@ -1,8 +1,6 @@
 /* jshint esnext:true */
 
-export {metaDirective};
-
-function metaDirective () {
+export default function metaDirective () {
     return {
         restrict: "AE",
         templateUrl: 'views/metaView.html',

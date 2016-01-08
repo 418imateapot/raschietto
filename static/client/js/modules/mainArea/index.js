@@ -14,11 +14,9 @@
 
 
 
-import {MainAreaController} from './mainController.js';
-import {mainAreaDirective} from './mainDirective.js';
+import MainAreaController from './mainController.js';
+import mainAreaDirective from './mainDirective.js';
 
-var mainArea = angular.module('teapot.modules.mainArea', []);
-mainArea.directive('mainArea', mainAreaDirective);
-mainArea.controller('MainAreaController', MainAreaController);
-
-export {mainArea};
+export default angular.module('teapot.modules.mainArea', [])
+.directive('mainArea', mainAreaDirective)
+.controller('MainAreaController', MainAreaController);

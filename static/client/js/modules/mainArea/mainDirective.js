@@ -5,7 +5,7 @@
  * @description
  * Mostra il contenuto del documento caricato
  */
-function mainAreaDirective() {
+export default function mainAreaDirective() {
     return {
         restrict: "AE",
         templateUrl: 'views/mainView.html',
@@ -14,5 +14,3 @@ function mainAreaDirective() {
         controllerAs: 'mainArea'
     };
 }
-
-export {mainAreaDirective};

@@ -1,11 +1,11 @@
 /* jshint esnext:true */
 
-export
-var raschiettoNavDirective = function () {
+export default function navbarDirective() {
     return {
         restrict: "AE",
         templateUrl: 'views/navbarView.html',
         scope: {},
-        controller: 'raschiettoNavbarCtrl'
+        controller: 'NavbarController',
+        controllerAs: 'navbar'
     };
-};
+}

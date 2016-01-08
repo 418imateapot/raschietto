@@ -9,9 +9,9 @@
  */
 
 // Componenti dell'applicazione
-import {router} from './routes.js';
-import {sharedServices} from './sharedServices/index.js';
-import {teapotModules} from './modules/index.js';
+import router from './routes.js';
+import sharedServices from './sharedServices/index.js';
+import teapotModules from './modules/index.js';
 
 /**
  * @name app

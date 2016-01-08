@@ -9,8 +9,6 @@
 
 router.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
 
-export {router};
-
 /**
  * @function 
  * @param {Service} $stateProvider
@@ -19,7 +17,7 @@ export {router};
  * @description
  * Configura le routes all'interno dell'applicazione
  */
-function router($stateProvider, $urlRouterProvider, $locationProvider) {
+export default function router($stateProvider, $urlRouterProvider, $locationProvider) {
 
     /* html5Mode permette di avere url puliti (senza abuso di #)
      * sui browser che lo supportano */

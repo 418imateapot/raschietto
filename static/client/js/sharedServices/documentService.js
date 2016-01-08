@@ -10,9 +10,9 @@
  */
 
 documentService.$inject = ['$http'];
-export {documentService};
 
-function documentService($http) {
+
+export default function documentService($http) {
 
     return {
         retrieve: retrieve,

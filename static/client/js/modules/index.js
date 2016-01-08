@@ -5,18 +5,16 @@
  *
  * @module teapot/modules
  */
-import {metaArea} from './metaArea/metaArea.js';
-import {mainArea} from './mainArea/mainArea.js';
-import {docArea} from './docArea/docArea.js';
-import {raschiettoNavbar} from './raschiettoNavbar/navbar.js';
-import {login} from './loginModal/index.js';
+import './metaArea/index.js';
+import './mainArea/index.js';
+import './docArea/index.js';
+import './raschiettoNavbar/index.js';
+import './loginModal/index.js';
 
-var teapotModules = angular.module('teapot.modules', [
+export default angular.module('teapot.modules', [
     'teapot.modules.metaArea',
     'teapot.modules.docArea',
     'teapot.modules.mainArea',
     'teapot.modules.navbar',
     'teapot.modules.login'
 ]);
-
-export {teapotModules};

@@ -6,9 +6,6 @@
 
 
 annotationService.$inject = ['$http'];
-export {
-    annotationService
-};
 
 /**
  * @function
@@ -18,7 +15,7 @@ export {
  * Servizio che, dato un url, chiede al triplestore le annotazioni
  * sulla fabio:Expression corrispondente
  */
-function annotationService($http) {
+export default function annotationService($http) {
     var promise;
 
     return {

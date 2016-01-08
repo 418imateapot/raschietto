@@ -1,5 +1,7 @@
 /*jshint esnext:true */
 
+MainAreaController.$inject = ['$scope', '$http', '$sce', 'documentService'];
+
 /**
  * @class
  * @name teapot.modules.mainArea.MainAreaController
@@ -9,7 +11,7 @@
  * @listens teapot.modules.docArea.DocumentController#change_document
  * @desc Controller per la mainArea
  */
-function MainAreaController($scope, $http, $sce, documentService) {
+export default function MainAreaController($scope, $http, $sce, documentService) {
     var mainArea = this;
 
     mainArea.loading = true; /** Usato per l'animazione */
@@ -53,6 +55,3 @@ function MainAreaController($scope, $http, $sce, documentService) {
     }
 
 }
-
-MainAreaController.$inject = ['$scope', '$http', '$sce', 'documentService'];
-export {MainAreaController};

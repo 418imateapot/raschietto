@@ -1,12 +1,12 @@
 /*jshint esnext:true */
 
-import {loginModal} from './loginModal.js';
-import {loginModalCtrl} from './loginModalCtrl.js';
-import {UserService} from './UserService.js';
+import loginModal from './loginModalService.js';
+import LoginModalController from './LoginModalController.js';
 
-var login = angular.module('teapot.modules.login', ['ngCookies']);
-login.service('loginModal', loginModal);
-login.controller('loginModalCtrl', loginModalCtrl);
-login.service('UserService', UserService);
+export default angular.module('teapot.modules.login', [
+    'ngCookies',
+    'teapot.sharedServices'
+])
 
-export {login};
+.service('loginModal', loginModal)
+.controller('LoginModalController', LoginModalController);
