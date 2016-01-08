@@ -16,6 +16,14 @@ def get_document():
     return get_doc(doc_url)
 
 
+@app.route('/annotations', methods=['GET'])
+def get_annotations():
+    doc_url = request.args.get('url')
+    # CHIAMA LO SCRAPER
+    # RESTITUISCI RISULTATO
+    return "<h1>Nulla da vedere</h1>"
+
+
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):

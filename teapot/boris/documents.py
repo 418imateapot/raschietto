@@ -81,9 +81,11 @@ def _statistica_(url_string):
 
     my_page = html.fromstring(body)
 
+    # Rimuovi il banner dei cookie del *****
     for el in my_page.xpath('//*[@id="cookiesAlert"]'):
         el.getparent().remove(el)
 
+    # Rimuovi tutti i tag script e il loro contenuto
     cleaner = Cleaner()
     cleaner.javascript = True
     my_page = cleaner.clean_html(my_page)

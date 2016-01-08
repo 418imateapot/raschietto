@@ -31,7 +31,7 @@ def upload_graph(serialized_graph):
             "ltw1543", "43het5=!X"))
     sparql.setQuery(query)
     sparql.setMethod('POST')
-    return sparql.query()
+    return sparql.queryAndConvert()
 
 # dato un URL di un'issue di dlib o statistica crea un json con titoli e
 # URL degli articoli di quel numero
@@ -83,7 +83,10 @@ def _createTriples(page_data):
     graph = rdflib.Graph()
 
     item = URIRef(page_data['url'])
-    work = URIRef(item[0:-5])
+    if '.html' in item:
+        work = URIRef(item[0:-5])
+    else:
+        work = URIRef(item)
     expression = URIRef(work + "_ver1")
     title = Literal(page_data['title'], datatype=XMLS.string)
     doi = Literal(page_data['doi'], datatype=XMLS.string)
