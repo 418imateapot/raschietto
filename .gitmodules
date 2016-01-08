@@ -1,0 +1,6 @@
+[submodule "doc/client"]
+	path = doc/client
+	url = https://github.com/418imateapot/raschietto-client
+[submodule "doc/server/_build"]
+	path = doc/server/_build
+	url = https://github.com/418imateapot/raschietto-server

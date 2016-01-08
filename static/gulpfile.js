@@ -200,8 +200,7 @@ gulp.task('build', function() {
 gulp.task('doc', shell.task([
     './node_modules/.bin/jsdoc ./client/js' +
     ' -r -d ' + doc_dest +
-    ' -c ../doc/jsdoc-conf.json' +
-    ' -P ./package.json -p'
+    ' -c ../doc/jsdoc-conf.json -p'
 ]));
 
 gulp.task('docco', function() {
