@@ -14,8 +14,8 @@
  *   - Controller: {@link teapot.modules.docArea.DocumentController}
  */
 
-import DocumentController from './docController.js';
-import  docAreaDirective from './docDirective.js';
+import DocumentController from './DocAreaController.js';
+import  docAreaDirective from './docAreaDirective.js';
 
 export default angular.module('teapot.modules.docArea', ['teapot.sharedServices'])
 

@@ -2,11 +2,6 @@
 
 
 /**
- * @ngdoc directive
- * @scope {}
- * @restrict AE
- *
- * @namespace
  * @name teapot.modules.docArea.docAreaDirective
  * @description
  * Mostra la lista di documenti

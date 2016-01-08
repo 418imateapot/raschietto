@@ -6,9 +6,7 @@ NavbarController.$inject = ['$rootScope', '$scope', '$state'];
  * @class
  * Controller per la metaArea
  */
-export
-default
-function NavbarController($rootScope, $scope, $state) {
+export default function NavbarController($rootScope, $scope, $state) {
 
     var navbar = this;
 
@@ -32,7 +30,7 @@ function NavbarController($rootScope, $scope, $state) {
     });
 
     // Controlla se dobbiamo mostrare "login" o "logout"
-    navbar.rs = $rootScope;
+    $scope.rs = $rootScope;
     $scope.$watch('rs.currentUser', function(newVal) {
         navbar.login = (newVal) ? 'Logout' : 'Login';
     });

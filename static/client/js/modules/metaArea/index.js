@@ -1,9 +1,9 @@
 /*jshint esnext:true */
 
-import MetaController from './metaController.js';
-import metaDirective from './metaDirective.js';
+import MetaController from './MetaAreaController.js';
+import metaAreaDirective from './metaAreaDirective.js';
 
 export default angular.module('teapot.modules.metaArea', [])
-.directive('metaArea', metaDirective)
+.directive('metaArea', metaAreaDirective)
 .controller('MetaController', MetaController);
 

@@ -1,14 +1,15 @@
 /* jshint esnext: true */
 
-/** @module teapot/sharedServices/annotationService */
+/** 
+* @module teapot/sharedServices/annotationService 
+* @todo Cancella i rami else di debug
+*/
 // TODO: Cancella i rami else di debug
-
-
 
 annotationService.$inject = ['$http'];
 
 /**
- * @function
+ * @namespace
  * @name teapot.sharedServices.annotationService
  *
  * @description

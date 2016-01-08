@@ -2,6 +2,9 @@
 
 loginModal.$inject = ['$modal', '$rootScope'];
 
+/**
+ * @namespace
+ */
 export default function loginModal($modal, $rootScope) {
 
     function assignCurrentUser(user) {

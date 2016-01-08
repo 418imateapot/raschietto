@@ -5,6 +5,9 @@
 
 MetaController.$inject = ['$scope', 'annotationService'];
 
+/**
+ * @class
+ */
 export default function MetaController($scope, annotationService) {
     var metaArea = this;
 

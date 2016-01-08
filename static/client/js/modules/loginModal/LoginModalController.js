@@ -2,6 +2,9 @@
 
 LoginModalController.$inject = ['$scope', 'userService'];
 
+/**
+ * @class
+ */
 export default function LoginModalController($scope, userService) {
     var loginModal = this;
 

@@ -22,7 +22,7 @@ export default function documentService($http) {
     //-- FUNCTION DEFINITIONS --//
 
     /**
-     * @function
+     * @namespace
      * @name retrieve
      *
      * @param {string} url L'URL http del documento da recuperare

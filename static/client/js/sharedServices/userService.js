@@ -3,7 +3,7 @@
 userService.$inject = ['$cookies'];
 
 /**
- * @mixin
+ * @namespace
  */
 export default function userService($cookies) {
 
