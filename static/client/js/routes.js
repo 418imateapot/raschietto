@@ -40,7 +40,7 @@ export default function router($stateProvider, $urlRouterProvider, $locationProv
         .state('home', {
         url: '/home',
         templateUrl: 'views/homeView.html',
-        controller: 'fakeController',
+        controller: 'DocumentController',
         data: {
             autenticazione: false
         }
@@ -52,7 +52,7 @@ export default function router($stateProvider, $urlRouterProvider, $locationProv
     .state('reader', {
         url: '/reader',
         templateUrl: 'views/homeView.html',
-        controller: 'fakeController',
+        controller: 'DocumentController',
         data: {
             autenticazione: false
         }

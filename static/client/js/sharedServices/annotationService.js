@@ -2,7 +2,6 @@
 
 /** 
 * @module teapot/sharedServices/annotationService 
-* @todo Cancella i rami else di debug
 */
 // TODO: Cancella i rami else di debug
 
@@ -10,32 +9,33 @@ annotationService.$inject = ['$http'];
 
 /**
  * @namespace
- * @name teapot.sharedServices.annotationService
  *
  * @description
  * Servizio che, dato un url, chiede al triplestore le annotazioni
  * sulla fabio:Expression corrispondente
+ *
+ * @todo Cancella i rami else di debug
  */
 export default function annotationService($http) {
     var promise;
 
     return {
-        retrieve: get,
+        query: query,
         tidy: tidy
     };
 
 
     /** 
-     * @function get
+     * @member
      * Restituisce la promessa del risultato di una query gigante
      * sul documento passato come arg.
      * @param String url L'url del documento interessato
      * @returns {Promise} La risposta alla query dallo SPARQL endpoint
      */
-    function retrieve(url) {
+    function query(url) {
         // Converti brutalmente da fabio:Item a fabio:Expression
         var expression = url.replace(/\.html$/, "_ver1");
-        var encodedQuery = encodeURIComponent(_query_template(expression));
+        var encodedQuery = encodeURIComponent(_build_query(expression));
         var endpoint = 'http://tweb2015.cs.unibo.it:8080/data';
         var opts = 'format=json&callback=JSON_CALLBACK';
         var url_string = `${endpoint}?query=${encodedQuery}&${opts}`;
@@ -56,7 +56,7 @@ export default function annotationService($http) {
     }
 
     /**
-     * @function tidy
+     * @inner
      * Convalida i risultati e li riorganizza
      * in un formato più appetibile
      * @param {Object} data Il risultato in JSON restituito da SPARQL
@@ -165,7 +165,7 @@ export default function annotationService($http) {
             return result;
         } // END tidy(data)
 
-    function _query_template(expr) {
+    function _build_query(expr) {
         // Usa i nuovi template string di ES6
         return `
         PREFIX oa: <http://www.w3.org/ns/oa#>

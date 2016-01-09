@@ -16,7 +16,7 @@ export default function MetaController($scope, annotationService) {
     $scope.$on('change_document', load_annotations);
 
     function load_annotations(event, args) {
-        annotationService.get(args.doc_url)
+        annotationService.query(args.doc_url)
             .then(response => {
                 metaArea.annotations = annotationService.tidy(response.body);
             }).catch(err => console.log(err));

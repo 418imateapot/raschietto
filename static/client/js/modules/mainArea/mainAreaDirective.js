@@ -1,6 +1,5 @@
 /* jshint esnext:true */
 /**
- * @namespace
  * @name teapot.modules.mainArea.mainAreaDirective
  * @description
  * Mostra il contenuto del documento caricato

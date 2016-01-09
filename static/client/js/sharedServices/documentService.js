@@ -12,6 +12,9 @@
 documentService.$inject = ['$http'];
 
 
+/**
+ * @namespace
+ */
 export default function documentService($http) {
 
     return {
@@ -22,9 +25,7 @@ export default function documentService($http) {
     //-- FUNCTION DEFINITIONS --//
 
     /**
-     * @namespace
-     * @name retrieve
-     *
+     * @inner
      * @param {string} url L'URL http del documento da recuperare
      * @description
      * Chiede al server tramite una richiesta GET asincrona 
