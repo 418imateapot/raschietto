@@ -36,8 +36,10 @@ export default function documentService($http) {
      * documento richiesto.
      */
     function retrieve(url) {
-        return $http.get('/api/docs?url=' + encodeURIComponent(url))
-            .then(response => {
+        return $http({
+            url: '/api/docs?url=' + encodeURIComponent(url),
+            cache: true
+        }).then(response => {
                 return {
                     'status': 'ok',
                     'resp': response.data
@@ -82,7 +84,7 @@ export default function documentService($http) {
         var query_url = `${endpoint}?query=${encodedQuery}&${opts}`; // ES6 Template String!
 
         // Recupera i titoli dei doc dal triplestore
-        return $http.jsonp(query_url)
+        return $http.jsonp(query_url, {cache: true})
             .then(response => {
                 return response.data.results.bindings;
             })
