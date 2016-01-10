@@ -1,4 +1,4 @@
-/* jshint esnext: true */
+
 
 LoginModalController.$inject = ['$scope', 'userService'];
 

@@ -1,4 +1,4 @@
-/* jshint esnext:true */
+
 
 /** 
  * Questo è l'entry point dell'applicazione, dove

@@ -1,4 +1,4 @@
-/*jshint esnext:true */
+
 
 MainAreaController.$inject = ['$scope', '$http', '$sce', '$stateParams', 'documentService'];
 

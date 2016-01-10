@@ -1,4 +1,4 @@
-/*jshint esnext:true */
+
 
 import MetaController from './MetaAreaController.js';
 import metaAreaDirective from './metaAreaDirective.js';

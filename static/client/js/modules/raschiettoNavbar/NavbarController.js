@@ -1,4 +1,4 @@
-/*jshint esnext:true */
+
 
 NavbarController.$inject = ['$rootScope', '$scope', '$state'];
 

@@ -1,4 +1,4 @@
-/* jshint esnext: true */
+
 /**
  * Questo modulo fa da contenitore per tutte le componenti
  * dell'applicazione.

@@ -1,4 +1,4 @@
-/* jshint esnext: true */
+
 
 import documentService from './documentService.js';
 import annotationService from './annotationService.js';

@@ -1,4 +1,4 @@
-/* jshint esnext:true */
+
 /**
  * @name teapot.modules.mainArea.mainAreaDirective
  * @description

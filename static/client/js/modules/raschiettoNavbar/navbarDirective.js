@@ -1,4 +1,4 @@
-/* jshint esnext:true */
+
 
 export default function navbarDirective() {
     return {

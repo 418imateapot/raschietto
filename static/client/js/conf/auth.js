@@ -1,4 +1,4 @@
-/* jshint esnext: true */
+
 
 checkAuth.$inject = ['$rootScope', '$state', 'loginModal'];
 

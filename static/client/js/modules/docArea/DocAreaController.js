@@ -1,4 +1,4 @@
-/* jshint esnext:true */
+
 
 DocumentController.$inject = ['$scope', '$rootScope', 'documentService'];
 

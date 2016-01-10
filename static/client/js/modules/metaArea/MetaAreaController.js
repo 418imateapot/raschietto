@@ -1,4 +1,4 @@
-/*jshint esnext:true */
+
 /**
  * Controller per la metaArea
  */

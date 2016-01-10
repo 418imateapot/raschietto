@@ -1,4 +1,4 @@
-/* jshint esnext:true */
+
 
 /** @module teapot/conf/routes */
 
