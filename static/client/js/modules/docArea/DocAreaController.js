@@ -1,6 +1,6 @@
 /* jshint esnext:true */
 
-DocumentController.$inject = ['$http', '$rootScope', 'documentService'];
+DocumentController.$inject = ['$scope', '$rootScope', 'documentService'];
 
 /**
  * @class
@@ -16,7 +16,7 @@ DocumentController.$inject = ['$http', '$rootScope', 'documentService'];
  *              $rootScope.$broadcast gli altri componenti quando l'utente
  *              desidera caricare un nuovo documento.
  */
-export default function DocumentController($http, $rootScope, documentService) {
+export default function DocumentController($scope, $rootScope, documentService) {
 
     var model = this;
 
@@ -26,14 +26,17 @@ export default function DocumentController($http, $rootScope, documentService) {
     model.docs = [];
     model.load = _load;
 
+    _init();
 
-    documentService.list()
-        .then(data => {
-            model.docs = data;
-        })
-        .catch(err => {
-            console.log(err);
-        });
+    function _init() {
+        documentService.list()
+            .then(data => {
+                model.docs = data;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
 
 
     /**

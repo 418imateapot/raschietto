@@ -11,7 +11,7 @@ MetaController.$inject = ['$scope', 'annotationService'];
 export default function MetaController($scope, annotationService) {
     var metaArea = this;
 
-    this.annotations = [];
+    metaArea.annotations = {};
 
     $scope.$on('change_document', load_annotations);
 
