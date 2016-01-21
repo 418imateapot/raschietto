@@ -19,7 +19,7 @@ for row in my_page.xpath("/html"):
     first_cell = row.xpath("//title")[0].text_content().encode("utf8")
     second_cell = row.xpath("//meta[@name='DOI']/@content")
     third_cell = row.xpath("//p[@class='blue']/b/text()")
-    fourth_cell = row.xpath("//p[@class='blue']")[0].text_content().encode("utf8")
+    fourth_cell = row.xpath("//p[1][@class='blue']/text()[following-sibling::br]")[0].encode("utf8"
 
     my_row = 'title: ', first_cell, 'doi: ',second_cell, 'Author: ', third_cell, 'data: ',fourth_cell
     my_data += my_row
